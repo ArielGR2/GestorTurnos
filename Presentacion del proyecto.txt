@@ -1,0 +1,14 @@
+Nombre del proyecto: Gestor de turnos Deportivos
+
+Desarrolladores: Fava, Lucas
+                 Romera, Ariel
+
+Cliente: Club Estudiantes de Olavarría - Pileta cubierta
+
+Requerimiento del cliente: Realizar una aplicación Web que permita al usuario de la disciplina natación reservar su espacio en la pileta en un determinado horario.
+Luego de loguearse el socio categorizado por su nivel técnico, podrá visualizar los andariveles disponibles y realizar la selección. 
+El profesor deberá tener acceso en tiempo real a la planilla de turnos para controlar el ingreso al natatorio.
+
+Objetivo: Desarrollar una aplicacion que cumpla con los requerimientos solicitados modernizando el sistema de turnos y maximizando el uso de las instalaciones evitando la perdida de tiempo de los socios.
+
+Problemática actual: Hoy en día la manera de verificar la disponibilidad es acercandose al lugar presencialmente.
