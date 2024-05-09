@@ -1,1 +1,4 @@
 Carpeta para alojar el desarollo del Frontend
+
+
+**Instalar React
