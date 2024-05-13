@@ -2,7 +2,7 @@
 import React from 'react'
 import './pageProfesor.css'
 
-export const Profesor = () => {
+export default function Profesor() {
   return (
     <div>page</div>
   )

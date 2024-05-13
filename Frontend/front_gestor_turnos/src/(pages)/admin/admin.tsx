@@ -2,7 +2,7 @@
 import React from 'react'
 import './pageAdmin.css'
 
-export const Admin = () => {
+export default function Admin() {
   return (
     <div>page</div>
   )

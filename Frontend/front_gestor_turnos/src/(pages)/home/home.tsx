@@ -3,7 +3,7 @@ import React from 'react';
 import './pageHome.css';
 
 
-export const Home = () => {
+export default function Home() {
   return (
     <div>Control de Ruteo - Page Home</div>
   )
