@@ -1,3 +1,0 @@
-Carpeta para alojar el desarollo de nuestro Backend
-
-**Instalar NestJS
