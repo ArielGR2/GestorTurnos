@@ -1,3 +1,8 @@
+PUERTO DE BASE DE BASEDEDATOS - MISMO PUERTO QUE SE PONGA EN DBEAVER (EJ 3306)
+PUERTO DE BACKEND -
+PUERTO DE FRONTEND -
+
+
 IMPORTANTE - Criterios de Ramas - https://github.com/cjadeveloper/gitflow-tutorial/blob/master/README.md
 Definir entre gitflow o trunk based
 
@@ -33,8 +38,9 @@ IMPORTANTE - Documentar API en Swagger
 Comandos instalacion: $ npm i -g @nestjs/cli
 Comandos nombre:      $ nest new project-name
 Comandos ejecucion:   $ npm run start / npm run start: dev (para ejecutar el BACKEND)
-Comandos instalacion: $ npm install @nestjs/jwt 
-Comandos instalacion: $ npm install @nestjs/bcryptjs
+Comandos instalacion: $ npm install @nestjs/jwt bcryptjs
+Comandos instalacion: $ npm install --save mysql2 (para instalar mysql2)
+Comandos instalacion: $ npm i class-validator
 --- comando correr el script de base de datos
 
 
