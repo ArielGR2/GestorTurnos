@@ -1,0 +1,52 @@
+IMPORTANTE - Criterios de Ramas - https://github.com/cjadeveloper/gitflow-tutorial/blob/master/README.md
+Definir entre gitflow o trunk based
+
+IMPORTANTE - Necesario Node.js superior a 18.16.0 para poder correr React. - https://nodejs.org/en/download
+
+0-- Realizar la instalacion de las dependencias de cada seccion del proyecto en la carpeta donde general donde seran utilizadas.
+Para BACKEND en GestorTurnos/Backend/
+Para FRONTEND en GestorTurnos/Frontend/front_gestor_turnos
+Para BASEDEDATOS en GestorTurnos/DataBase/
+
+1--FRONTEND-React
+Instalar React - https://es.react.dev/learn/start-a-new-react-project
+Instalar Axios para Conectar Back con Front - https://axios-http.com/docs/intro
+
+Comandos instalacion: $ npx create-next-app@latest
+Comandos instalacion: $ npm install axios
+Comandos instalacion: $ react-router-dom
+Comandos ejecucion:   $ npm run dev (para ejecutar el FRONTEND)
+
+
+-Crear LoginUser en el servicio Gestordeturnos.js para aplicar posteriormente el Axios.js
+-Crear servicio Axios.js para crear la conexion con BACKEND - Revisar Clase12 - 03/04 
+Para ello definir puerto de conexion entre FRONTEND y BACKEND
+El puerto que se coloca en Axios.Js en FRONTEND debe ser el mismo que se coloca en main.ts de BACKEND. (Ej: 8083).
+
+
+
+2--BACKEND-NestJS
+Instalar NestJS  - https://docs.nestjs.com/
+
+IMPORTANTE - Documentar API en Swagger
+
+Comandos instalacion: $ npm i -g @nestjs/cli
+Comandos nombre:      $ nest new project-name
+Comandos ejecucion:   $ npm run start / npm run start: dev (para ejecutar el BACKEND)
+Comandos instalacion: $ npm install @nestjs/jwt 
+Comandos instalacion: $ npm install @nestjs/bcryptjs
+--- comando correr el script de base de datos
+
+
+-En main.ts conectar el FRONTEND colocando el mismo puerto (Ej: 8083).
+Recordar habilitar CORS con app.enableCors() para permitir el acceso a los recursos desde el FRONTEND;
+
+
+3--Base de datos
+????----https://dev.mysql.com/downloads/installer/
+????----https://aka.ms/vs/17/release/vc_redist.x64.exe
+????----https://dbeaver.io/download/
+
+Definir motor para utilizar
+Generar tablas - Entidades y Relaciones
+Establecer las Querys necesarias, probarlas en el motor  y luego trasladarlas al front

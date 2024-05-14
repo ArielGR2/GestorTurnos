@@ -5,6 +5,6 @@ import './Footer.css'
 
 export const Footer = () => {
   return (
-    <div>Header</div>
+    <div className='div-Footer'>Footer</div>
   )
 }

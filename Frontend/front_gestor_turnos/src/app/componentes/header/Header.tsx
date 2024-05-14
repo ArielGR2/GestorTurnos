@@ -5,6 +5,6 @@ import './Header.css'
 
 export const Header = () => {
   return (
-    <div>Header</div>
+    <div className='div-Header'>Header</div>
   )
 }
