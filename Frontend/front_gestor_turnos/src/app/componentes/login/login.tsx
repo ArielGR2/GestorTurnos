@@ -11,8 +11,8 @@ export const Login = () => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+    // console.log(name);
+    // console.log(value);
     setUsuario(prevState => ({
       ...prevState,
       [name]: value
@@ -29,7 +29,6 @@ export const Login = () => {
 
   return (
     <>
-      
     <form onSubmit={handleSubmit}>
         <h2>Login</h2>
         {/* <input type="number" onChange={handleChange} /> */}

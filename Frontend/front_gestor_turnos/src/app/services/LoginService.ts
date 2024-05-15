@@ -1,7 +1,7 @@
 'use client'
 import  clienteAxios  from "../services/Axios";
 import { AxiosResponse } from 'axios';
-// import { iUsuarioLogin } from "../../model/iUsuario";
+import { iUsuarioLogin } from "../model/iUsuario";
 
 export const loginUser = async (usuario: any) => {
   try {
@@ -10,7 +10,7 @@ export const loginUser = async (usuario: any) => {
     return response.data;
   } catch (error) {
     throw new Error('Error en el login');
-  }
+  };
 }
 
 

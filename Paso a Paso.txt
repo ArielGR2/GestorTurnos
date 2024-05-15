@@ -1,6 +1,6 @@
 PUERTO DE BASE DE BASEDEDATOS - MISMO PUERTO QUE SE PONGA EN DBEAVER (EJ 3306)
-PUERTO DE BACKEND -
-PUERTO DE FRONTEND -
+PUERTO DE BACKEND - puerto 8080 en el mains.ts
+PUERTO DE FRONTEND - 
 
 
 IMPORTANTE - Criterios de Ramas - https://github.com/cjadeveloper/gitflow-tutorial/blob/master/README.md
