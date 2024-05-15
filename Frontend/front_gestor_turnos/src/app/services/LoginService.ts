@@ -5,24 +5,13 @@ import { iUsuarioLogin } from "../model/iUsuario";
 
 export const loginUser = async (usuario: any) => {
   try {
-    const response = await Promise.resolve(clienteAxios.post("http://localhost:8080/auth/login", usuario));
+    const response: AxiosResponse<any, any> = await clienteAxios.post("http://localhost:8080/auth/login", usuario);
     sessionStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (error) {
+    alert('Usuario o Contraseña invalidos');
     throw new Error('Error en el login');
   };
 }
 
-
-// export const loginUser = async (usuario) => {
-//   try {
-//     const response = await Promise.resolve(clienteAxios.post("http://localhost:8080/auth/login", usuario));
-//     sessionStorage.setItem('token', response.data.accessToken);
-//     console.log(response);
-//     console.log("Llegamos aca");
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
