@@ -6,6 +6,7 @@ import usuariosQueries from './queries/usuarios.queries';
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 
+
 @Injectable()
 export class LoginService {
     constructor(private jwtService: JwtService, private databaseService: DatabaseService) { }

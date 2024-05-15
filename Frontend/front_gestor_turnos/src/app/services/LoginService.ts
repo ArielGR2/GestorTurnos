@@ -5,7 +5,7 @@ import { iUsuarioLogin } from "../model/iUsuario";
 
 export const loginUser = async (usuario: any) => {
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.post("auth/login", usuario);
+    const response = await Promise.resolve(clienteAxios.post("http://localhost:8080/auth/login", usuario));
     sessionStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (error) {
@@ -13,4 +13,16 @@ export const loginUser = async (usuario: any) => {
   };
 }
 
+
+// export const loginUser = async (usuario) => {
+//   try {
+//     const response = await Promise.resolve(clienteAxios.post("http://localhost:8080/auth/login", usuario));
+//     sessionStorage.setItem('token', response.data.accessToken);
+//     console.log(response);
+//     console.log("Llegamos aca");
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 

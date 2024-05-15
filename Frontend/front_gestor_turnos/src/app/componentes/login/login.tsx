@@ -26,7 +26,6 @@ export const Login = () => {
     loginUser(usuario);
   };
 
-
   return (
     <>
     <form onSubmit={handleSubmit}>
