@@ -10,7 +10,7 @@ export class DatabaseService {
       // este puerto lo tenemos que tener igual con Ariel
       port: 3306,
       database: 'gestor_turnos',
-      password: 'root123',
+      password: 'VaderLuis+1_',
       host: 'localhost',
       user: 'root',
       // cantidad maxima de conexiones en el pool

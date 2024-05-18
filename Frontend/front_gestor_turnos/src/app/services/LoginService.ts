@@ -5,7 +5,7 @@ import { iUsuarioLogin } from "../model/iUsuario";
 
 export const loginUser = async (usuario: any) => {
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.post("http://localhost:8080/auth/login", usuario);
+    const response: AxiosResponse<any, any> = await clienteAxios.post("/auth/login", usuario);
     sessionStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (error) {
