@@ -1,7 +1,10 @@
-insert into roles (codigoRol, nombre) values ("usr", "usuario");
-insert into roles (codigoRol, nombre) values ("adm", "administrador");
-insert into roles (codigoRol, nombre) values ("prf", "profesor");
+/*Inserto datos en tabla t_roles*/
+insert into t_roles (rolId, codigoRol, nombre) values (0, "Adm", "Administrador");
+insert into t_roles (rolId, codigoRol, nombre) values (1, "Nad", "Usuario");
+insert into t_roles (rolId, codigoRol, nombre) values (2, "Prf", "Profesor");
 
-insert into usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("user@user.com", "user", "user", 1, 2284604080, "1986-12-14", 1);
-insert into usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("adm@adm.com", "admin", "admin", 1, 2284605070, "1978-01-08", 2);
-insert into usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("profe@profe.com", "profe", "profe", 1, 2284602030, "1981-09-23", 3);
+/*Inserto datos en tabla t_usuarios*/
+insert into t_usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("user@user.com", "nadador", "nadador", true, 2284604080, "1986-12-14", 1);
+insert into t_usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("adm@adm.com", "admin", "admin", true, 2284605070, "1978-01-08", 0);
+insert into t_usuarios (email, username , password , activo , nrotelefono, fechanacimiento , rolId  ) values ("profe@profe.com", "profe", "profe", true, 2284602030, "1981-09-23", 2);
+
