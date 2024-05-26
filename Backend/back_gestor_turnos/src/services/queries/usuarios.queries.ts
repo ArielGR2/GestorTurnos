@@ -1,5 +1,5 @@
 const usuariosQueries = {
-  getUser: 'select * from usuarios where username = ? and password = ?;',
+  getUser: 'select * from t_usuarios where username = ? and password = ?;',
   // insert: 'insert into peliculas (peliculaId, titulo, sinopsis, imagen, duracion, fechaLanzamiento) values (?, ?,?,?,?,?);',
   // selectById: 'select peliculaId, titulo, sinopsis, imagen, duracion, fechaLanzamiento from peliculas where peliculaId = ?;',
   // update: 'update peliculas set titulo = ? where peliculaId = ?;',

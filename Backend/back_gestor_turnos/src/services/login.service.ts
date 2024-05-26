@@ -30,6 +30,7 @@ export class LoginService {
             throw new NotFoundException('El usuario no existe');
         };
         const result = resultQuery[0];
+        console.log("Valor del Objeto en la DB: ",result)
         return {
             username: result['username'],
             password: result['password'],
