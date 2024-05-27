@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
 import './pageProfesor.css'
+import withRoles from '@/app/componentes/HOC/WithRoles';
 
-export default function Profesor() {
+const Profesor = ()=> {
   return (
     <>
     <div className='div-pageProfesor'>Bienvenido Profesor</div>
@@ -11,3 +12,5 @@ export default function Profesor() {
     </>
   )
 }
+
+export default withRoles(Profesor, ["Profesor"], "/home")

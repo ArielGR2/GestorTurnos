@@ -1,8 +1,9 @@
 'use client'
+import withRoles from '@/app/componentes/HOC/WithRoles';
 import React from 'react'
 import './pageAdmin.css'
 
-export default function Admin() {
+const Admin = () => {
   return (
     <>
     <div className='div-pageAdmin'>Bienvenido ADMINISTRADOR</div>
@@ -11,3 +12,5 @@ export default function Admin() {
     </>
   )
 }
+export default withRoles(Admin, ["Administrador"], "/home")
+

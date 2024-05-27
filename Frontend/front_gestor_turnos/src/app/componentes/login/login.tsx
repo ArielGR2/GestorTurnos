@@ -14,8 +14,6 @@ export const Login = () => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    // console.log(name);
-    // console.log(value);
     setUsuario(prevState => ({
       ...prevState,
       [name]: value
@@ -25,7 +23,7 @@ export const Login = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(usuario);
-    
+
     loginUser(usuario);
 
     if (usuario.username == "admin" && usuario.password == "admin") {
@@ -35,37 +33,17 @@ export const Login = () => {
     } else if (usuario.username == "profe" && usuario.password == "profe") {
       router.push("./profesor");
     }
-    else {
-      alert("No se ha ENCONTRADO")
-    }
-    /* if (loginExitoso) {
-      const userData = await getInformacionUsuario();
-      if (userData?.role === "ADM") {
-        router.push("./administrador");
-      } else {
-        router.push("./jugador");
-      }
-    } */
-
   };
 
-
-
-
-
-return (
-  <>
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      {/* <input type="number" onChange={handleChange} /> */}
-      <input type="text" name="username" value={usuario.username} onChange={handleChange} className="input" />
-      <input type="text" name="password" value={usuario.password} onChange={handleChange} className="input" />
-
-      <br />
-      <button type="submit" className="submit-button">Log In</button>
-    </form>
-  </>
-
-
-)
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <input type="text" name="username" value={usuario.username} onChange={handleChange} className="input" />
+        <input type="text" name="password" value={usuario.password} onChange={handleChange} className="input" />
+        <br />
+        <button type="submit" className="submit-button">Log In</button>
+      </form>
+    </>
+  )
 };
