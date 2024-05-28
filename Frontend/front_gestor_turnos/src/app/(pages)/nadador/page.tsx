@@ -14,6 +14,6 @@ const Nadador = () => {
   )
 }
 
-export default withRoles(Nadador, ["Nadador"], "/home");
+export default withRoles(Nadador, [1], "/home");
 
 

@@ -1,24 +1,29 @@
 "use client"
 import { useRouter } from "next/navigation";
 
-function tienePermisosRequeridos (permisosRequeridos:string[]): boolean {
-    const permisosDeUsuario = ["Nadador", "Administrador", "Profesor"];
-    return permisosRequeridos.some((permiso)=>permisosDeUsuario.includes(permiso))
-    }   
-    
-export default function withRoles(Componente:any, permisosRequeridos: string[], goBackRoute: string) {
-    return function whitRolesWrapper(props:any) {
+export default function withRoles(Componente: any, permisosRequeridos: number[], goBackRoute: string) {
+    return function whitRolesWrapper(props: any) {
         const router = useRouter();
         const tienePermiso = tienePermisosRequeridos(permisosRequeridos);
         if (tienePermiso) {
             console.log("Tiene permiso: ", tienePermiso);
             return <Componente {...props} />
-
-        } else{
-            alert("No tiene permiso, debe loguearse nuevamente");
+        } else {
             router.push(goBackRoute);
             return null;
         }
     }
 }
 
+function tienePermisosRequeridos(permisosRequeridos: number[]): boolean {
+    try {
+        const jwt = require('jsonwebtoken');
+        const permisosDeUsuario: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
+        if (permisosDeUsuario != null) {
+            return permisosRequeridos.some((permiso) => permisosDeUsuario === permiso);
+        };
+        return false;
+    } catch (error) {
+        return false;
+    };
+}

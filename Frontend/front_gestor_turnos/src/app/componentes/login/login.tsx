@@ -20,18 +20,20 @@ export const Login = () => {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    //console.log(usuario);
-
-    loginUser(usuario);
-
-    if (usuario.username == "admin") {
-      router.push("./administrador");
-    } else if (usuario.username == "nadador") {
-      router.push("./nadador");
-    } else if (usuario.username == "profe") {
-      router.push("./profesor");
+    const loginExitoso = await loginUser(usuario);
+    if (loginExitoso) {
+      const jwt = require('jsonwebtoken');
+      const rolId: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
+    
+      if (rolId == 0) {
+        router.push("./administrador");
+      } else if (rolId == 1) {
+        router.push("./nadador");
+      } else if (rolId == 2) {
+        router.push("./profesor");
+      }
     }
   };
 

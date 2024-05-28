@@ -12,5 +12,5 @@ const Admin = () => {
     </>
   )
 }
-export default withRoles(Admin, ["Administrador"], "/home")
+export default withRoles(Admin, [0], "/home")
 
