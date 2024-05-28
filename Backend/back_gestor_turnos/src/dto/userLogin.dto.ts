@@ -9,7 +9,8 @@ class UserLoginDTO{
   @IsString()
   password:string; 
   @IsNumber()
-  rolId: number;
+  rolId: number ;
+  
 }
 
 export default UserLoginDTO;

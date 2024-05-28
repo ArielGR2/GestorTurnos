@@ -12,6 +12,6 @@ export class LoginController {
         if (!user) {
             throw new HttpException("Usuario invalido", HttpStatus.UNAUTHORIZED);
         };
-        return this.loginService.login(user)
+        return this.loginService.login(user);
     };
 }

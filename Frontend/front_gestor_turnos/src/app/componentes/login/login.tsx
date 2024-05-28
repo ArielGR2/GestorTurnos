@@ -22,15 +22,15 @@ export const Login = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(usuario);
+    //console.log(usuario);
 
     loginUser(usuario);
 
-    if (usuario.username == "admin" && usuario.password == "admin") {
+    if (usuario.username == "admin") {
       router.push("./administrador");
-    } else if (usuario.username == "nadador" && usuario.password == "nadador") {
+    } else if (usuario.username == "nadador") {
       router.push("./nadador");
-    } else if (usuario.username == "profe" && usuario.password == "profe") {
+    } else if (usuario.username == "profe") {
       router.push("./profesor");
     }
   };

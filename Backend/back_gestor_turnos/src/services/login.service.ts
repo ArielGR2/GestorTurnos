@@ -4,42 +4,52 @@ import { DatabaseService } from './db.service';
 import UserLoginDTO from 'src/dto/userLogin.dto';
 import usuariosQueries from './queries/usuarios.queries';
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-
-
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class LoginService {
     constructor(private jwtService: JwtService, private databaseService: DatabaseService) { }
-    // Agregar Bcryptjs
 
     async validateUser(user: UserLoginDTO): Promise<any> {
+        /* USÉ PARA CREAR EN HASH EN DBEAVER: */
+        /*const contraHaseada = await this.hashearContrasenia("nadador");
+        console.log("Contraseña hasheada: ",contraHaseada);  */
 
-        const usuarioDB = await this.getUserDB(user.username, user.password);
-        if (user.username === usuarioDB.username && user.password === usuarioDB.password) {
-            return {
-                username: usuarioDB.username,
-                rolId: usuarioDB.rolId
+        const usuarioDB = await this.getUserDB(user.username);
+
+        if (usuarioDB) {
+            if (await bcrypt.compare(user.password, usuarioDB.password)) {
+                return {
+                    username: usuarioDB.username,
+                    rolId: usuarioDB.rolId,
+                };
             };
+            return null;
         };
-        return null;
     };
 
-    async getUserDB(username: string, password: string): Promise<UserLoginDTO> {
-        const resultQuery: RowDataPacket[] = await this.databaseService.executeSelect(usuariosQueries.getUser, [username, password]);
+    async hashearContrasenia(password: string): Promise<string> {
+        return bcrypt.hash(password, 10);
+    }
+
+    async getUserDB(username: string): Promise<UserLoginDTO> {
+        const resultQuery: RowDataPacket[] = await this.databaseService.executeSelect(usuariosQueries.getUser, [username]);
         if (resultQuery.length === 0) {
             throw new NotFoundException('El usuario no existe');
         };
         const result = resultQuery[0];
-        console.log("Valor del Objeto en la DB: ",result)
         return {
             username: result['username'],
             password: result['password'],
-            rolId: result['rolId']
+            rolId: result['rolId'],
         };
     };
 
     login(user: UserLoginDTO) {
-        const payload = { username: user.username };
+        const payload = {
+            username: user.username,
+            rolId: user.rolId
+        };
         return { accessToken: this.jwtService.sign(payload), };
     };
 }
