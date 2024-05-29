@@ -26,7 +26,7 @@ export const Login = () => {
     if (loginExitoso) {
       const jwt = require('jsonwebtoken');
       const rolId: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
-    
+
       if (rolId == 0) {
         router.push("./administrador");
       } else if (rolId == 1) {
@@ -39,12 +39,16 @@ export const Login = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <input type="text" name="username" value={usuario.username} onChange={handleChange} className="input" />
-        <input type="text" name="password" value={usuario.password} onChange={handleChange} className="input" />
-        <br />
-        <button type="submit" className="submit-button">Log In</button>
+      <form onSubmit={handleSubmit} className='formLogin'>
+        <div className='divLogin'>
+          <h2>Login</h2>
+          <label>Ingrese su usuario:</label>
+          <input type="text" name="username" value={usuario.username} onChange={handleChange} className="input" placeholder='Usuario...' />
+          <label>Ingrese su contraseña:</label>
+          <input type="text" name="password" value={usuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
+          <br />
+          <button type="submit" className="submit-button">Log In</button>
+        </div>
       </form>
     </>
   )
