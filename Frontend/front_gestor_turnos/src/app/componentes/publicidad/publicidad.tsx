@@ -9,7 +9,7 @@ export default function Publicidad() {
     <>
       <div className='publicidad'>
 
-        <img src={publicidad.src} alt="logo" />
+        <img height="200px" src={publicidad.src} alt=""/>
       <h1 className='asd'>asd</h1>
       </div>
     </>
