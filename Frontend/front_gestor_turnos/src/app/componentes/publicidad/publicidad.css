@@ -1,7 +1,7 @@
 .publicidad {
   width: 400px;
   height: 200px;
-  background-image: url(../../../../public/publicidad.jpg);
+  /*background-image: url(../../../../public/publicidad.jpg);*/
   border: 2px solid black;
   border-radius: 5px;
   padding: 20px;

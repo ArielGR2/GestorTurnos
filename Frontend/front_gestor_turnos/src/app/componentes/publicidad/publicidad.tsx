@@ -8,9 +8,8 @@ export default function Publicidad() {
   return (
     <>
       <div className='publicidad'>
-
-        <img height="200px" src={publicidad.src} alt=""/>
-      <h1 className='asd'>asd</h1>
+        {/* <h1 className='Natatorio CAE'>asd</h1> */}
+        <img height="200px" src={publicidad.src} alt="" />
       </div>
     </>
 
