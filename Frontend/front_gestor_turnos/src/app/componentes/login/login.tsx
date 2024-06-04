@@ -23,6 +23,7 @@ export const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const loginExitoso = await loginUser(usuario);
+    
     if (loginExitoso) {
       const jwt = require('jsonwebtoken');
       const rolId: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
@@ -45,7 +46,7 @@ export const Login = () => {
           <label>Ingrese su usuario:</label>
           <input type="text" name="username" value={usuario.username} onChange={handleChange} className="input" placeholder='Usuario...' />
           <label>Ingrese su contraseña:</label>
-          <input type="text" name="password" value={usuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
+          <input type="password" name="password" value={usuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
           <br />
           <button type="submit" className="submit-button">Log In</button>
         </div>
