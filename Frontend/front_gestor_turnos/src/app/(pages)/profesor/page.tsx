@@ -13,4 +13,4 @@ const Profesor = ()=> {
   )
 }
 
-export default withRoles(Profesor, [2], "/home")
+export default withRoles(Profesor, [2], "./home")
