@@ -1,4 +1,4 @@
-'use clinet'
+'use client'
 import React from 'react';
 import './pageHome.css';
 import { Login } from "../../componentes/login/login";

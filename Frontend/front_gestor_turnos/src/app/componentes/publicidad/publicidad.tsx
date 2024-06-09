@@ -1,4 +1,4 @@
-'use clinet'
+'use client'
 import React from 'react';
 import './publicidad.css';
 import publicidad from '../../../../public/publicidad.jpg'
