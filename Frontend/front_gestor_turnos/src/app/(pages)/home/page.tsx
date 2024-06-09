@@ -3,6 +3,7 @@ import React from 'react';
 import './pageHome.css';
 import { Login } from "../../componentes/login/login";
 import Publicidad from "../../componentes/publicidad/publicidad";
+import { Register } from '@/app/componentes/register/Register';
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <div className='divContenedor'>
         <Publicidad />
         <Login />
+        <Register />   
       </div>
     </>
   )
