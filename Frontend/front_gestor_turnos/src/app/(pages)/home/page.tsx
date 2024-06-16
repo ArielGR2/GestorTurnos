@@ -13,7 +13,7 @@ export default function Home() {
       <div className='divContenedor'>
         <Publicidad />
         <Login />
-        <Register />   
+        {/* <Register />  Comento este segmento de codigo hasta definir si lo vamos a utilizar  */}
       </div>
     </>
   )

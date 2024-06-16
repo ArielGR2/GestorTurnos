@@ -1,7 +1,7 @@
 'use client';
 import './Register.css';
 import React, { useState } from 'react'
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const Register = () => {
@@ -15,7 +15,7 @@ export const Register = () => {
     rolId: 1,
   });
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
