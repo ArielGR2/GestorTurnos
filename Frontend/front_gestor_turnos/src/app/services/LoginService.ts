@@ -12,10 +12,20 @@ export const loginUser = async (usuario: any) => {
     alert('Usuario o Contraseña invalidos');
     throw new Error('Error en el login');
   };
-}
+};
 
-// export const getInformacionUsuario = async (): Promise<{ username: string; role: string }> => {
-//   const response = await clienteAxios.get("/usuarios/info");
-//   return response.data;
-// }
+export const getInformacionUsuario = async (): Promise<{ email: string; role: string }> => {
+  const response = await clienteAxios.get("/usuarios/info");
+  return response.data;
+};
+
+export async function signUp(body: { email: string; password: string }):Promise<boolean> {
+  try {
+    const response = await clienteAxios.post("/register", body );
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 

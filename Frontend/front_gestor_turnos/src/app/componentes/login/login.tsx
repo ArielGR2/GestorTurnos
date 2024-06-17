@@ -1,16 +1,19 @@
 'use client';
 import './login.css';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { loginUser } from '../../services/LoginService';
 import { useRouter } from 'next/navigation';
 
 export const Login = () => {
+  const router = useRouter();
+
   const [usuario, setUsuario] = useState({
     username: '',
     password: '',
   });
 
-  const router = useRouter();
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -38,8 +41,23 @@ export const Login = () => {
     }
   };
 
+  // const cargarUsuarioLogueado = async () => {
+  //   const userData = await 
+  // }
+
+  // // Efecto para mostrar o no el logueo/register
+  // useEffect(()=>{
+  //   const token = sessionStorage.getItem("accessToken");
+  //   if (token) {
+  //     console.log(token);
+  //   } else {
+  //     setShowLogin(true);
+  //   }
+  // },[]);
+
   return (
     <>
+    {/* Reformar el componente para que tenga los botones de Login y Register */}
       <form onSubmit={handleSubmit} className='formLogin'>
         <div className='divLogin'>
           <h2>Login</h2>
@@ -48,7 +66,7 @@ export const Login = () => {
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={usuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
           <br />
-          <button type="submit" className="submit-button">Log In</button>
+          <button type="submit" className="submit-button">Login Nadador</button>
         </div>
       </form>
     </>

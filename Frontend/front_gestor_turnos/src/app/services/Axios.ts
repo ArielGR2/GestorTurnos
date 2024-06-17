@@ -6,6 +6,19 @@ const clienteAxios = axios.create({
   baseURL: 'http://localhost:8080',
 });
 
+// const createCliente =()=> {
+//   const token = localStorage.getItem("accessToken");
+//   const cliente = axios.create({
+//     baseURL: 'http://localhost:8080',
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     }
+//   });
+//   return cliente;
+// };
+
+// const clienteAxios2 = createCliente();
+
 clienteAxios.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -33,4 +46,5 @@ clienteAxios.interceptors.response.use(
   }
 );
 
-export default clienteAxios;
+export default clienteAxios; /*clienteAxios2;*/
+

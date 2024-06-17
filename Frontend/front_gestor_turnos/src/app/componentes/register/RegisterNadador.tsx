@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 // import { useRouter } from 'next/navigation';
 import { registrarUsuario } from '@/app/services/RegisterService';
 
-export const Register = () => {
+export const RegisterNadador = () => {
   const [nuevoUsuario, setNuevoUsuario] = useState({
     email: '',
     username: '',
@@ -47,7 +47,7 @@ export const Register = () => {
     <>
       <form onSubmit={handleRegister} className='formLogin'>
         <div className='divLogin'>
-          <h2>Registrarse</h2>
+          <h2>Registrar Nadador</h2>
           <label>Ingrese su usuario:</label>
           <input type="text" name="username" value={nuevoUsuario.username} onChange={handleChange} className="input" placeholder='Usuario...' />
           <label>Ingrese su email:</label>
@@ -59,7 +59,7 @@ export const Register = () => {
           <label>Fecha de Nacimiento:</label>
           <input type="date" name="fechanacimiento" value={nuevoUsuario.fechanacimiento} onChange={handleChange} className="input" placeholder='Fecha...' />
           <br />
-          <button type="submit" className="submit-button">Registrarse</button>
+          <button type="submit" className="submit-button">Registrar</button>
         </div>
       </form>
     </>
