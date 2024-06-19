@@ -66,7 +66,7 @@ export const Login = () => {
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={usuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
           <br />
-          <button type="submit" className="submit-button">Login Nadador</button>
+          <button type="submit" className="submit-button">Ingresar</button>
         </div>
       </form>
     </>

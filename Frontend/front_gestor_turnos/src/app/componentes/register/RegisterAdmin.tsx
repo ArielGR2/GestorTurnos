@@ -28,7 +28,7 @@ export const RegisterAdministrador = () => {
   const handleRegister = async (e: any) => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoAdmin);
-
+    alert("Nuevo Admin Registrado");
     // if (usuarioRegistrado) {
     //   const jwt = require('jsonwebtoken');
     //   const rolId: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
@@ -50,14 +50,8 @@ export const RegisterAdministrador = () => {
           <h2>Registrar Administrador</h2>
           <label>Ingrese nuevo Profesor:</label>
           <input type="text" name="username" value={nuevoAdmin.username} onChange={handleChange} className="input" placeholder='Usuario...' />
-          <label>Ingrese su email:</label>
-          <input type="email" name="email" value={nuevoAdmin.email} onChange={handleChange} className="input" placeholder='Email...' />
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={nuevoAdmin.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
-          <label>Ingrese su celular:</label>
-          <input type="number" name="nrotelefono" value={nuevoAdmin.nrotelefono} onChange={handleChange} className="input" placeholder='Celular...' />
-          <label>Fecha de Nacimiento:</label>
-          <input type="date" name="fechanacimiento" value={nuevoAdmin.fechanacimiento} onChange={handleChange} className="input" placeholder='Fecha...' />
           <br />
           <button type="submit" className="submit-button">Registrar</button>
         </div>

@@ -18,12 +18,9 @@ export class RegisterService {
     const passwordEncriptada = await this.hashearContrasenia(usuario.password);
 
     await this.databaseService.executeQuery(usuariosQueries.registerUser, [
-      usuario.email,
       usuario.username,
       passwordEncriptada,
       true,
-      usuario.nrotelefono,
-      usuario.fechanacimiento,
       usuario.rolId
     ]);
     return usuario.username;

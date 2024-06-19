@@ -1,6 +1,5 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import UsuarioDTO from "src/dto/usuario.dto";
-import { LoginService } from "src/services/login.service";
 import { RegisterService } from "src/services/register.service";
 
 @Controller('/register')

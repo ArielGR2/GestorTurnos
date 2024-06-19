@@ -16,8 +16,8 @@ const Admin = () => {
   const cerrarSesion = () => {
     sessionStorage.removeItem('token');
     setIsLoggedIn(false);
+    router.push('home');
     if (pathname !== '/home') {
-      router.push('home');
     };
   };
 

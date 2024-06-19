@@ -6,9 +6,6 @@ class UsuarioDTO {
     @IsOptional()
     usuarioId: number;
     @IsOptional()
-    @IsEmail()
-    email: string;
-    @IsOptional()
     @IsString()
     username: string;
     @IsOptional()
@@ -17,12 +14,6 @@ class UsuarioDTO {
     @IsOptional()
     @IsBoolean()
     activo: boolean;
-    @IsOptional()
-    @IsNumber()
-    nrotelefono: number;
-    @IsOptional()
-    @IsDate()
-    fechanacimiento: Date;
     @IsOptional()
     @IsNumber()
     rolId: number;
