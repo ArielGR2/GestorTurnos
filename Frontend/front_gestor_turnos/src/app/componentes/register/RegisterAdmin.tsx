@@ -6,12 +6,9 @@ import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterAdministrador = () => {
   const [nuevoAdmin, setNuevoAdmin] = useState({
-    email: '',
     username: '',
     password: '',
     activo: true,
-    nrotelefono: '',
-    fechanacimiento: '',
     rolId: 0,
   });
 
@@ -29,18 +26,6 @@ export const RegisterAdministrador = () => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoAdmin);
     alert("Nuevo Admin Registrado");
-    // if (usuarioRegistrado) {
-    //   const jwt = require('jsonwebtoken');
-    //   const rolId: number | null = jwt.decode(sessionStorage.getItem('token')).rolId;
-
-    //   if (rolId == 0) {
-    //     router.push("./administrador");
-    //   } else if (rolId == 1) {
-    //     router.push("./nadador");
-    //   } else if (rolId == 2) {
-    //     router.push("./profesor");
-    //   }
-    // }
   };
 
   return (

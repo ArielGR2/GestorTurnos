@@ -6,16 +6,11 @@ import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterProfesor = () => {
   const [nuevoUsuario, setNuevoUsuario] = useState({
-    email: '',
     username: '',
     password: '',
     activo: true,
-    nrotelefono: '',
-    fechanacimiento: '',
     rolId: 2,
   });
-
-  // const router = useRouter();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -30,10 +25,7 @@ export const RegisterProfesor = () => {
     const usuarioRegistrado = await registrarUsuario(nuevoUsuario);
     alert("Nuevo Profesor Registrado");
     // vaciarFormulario();
-
   };
-
-
 
 
   return (

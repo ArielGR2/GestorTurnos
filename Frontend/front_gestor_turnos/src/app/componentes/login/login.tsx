@@ -41,19 +41,6 @@ export const Login = () => {
     }
   };
 
-  // const cargarUsuarioLogueado = async () => {
-  //   const userData = await 
-  // }
-
-  // // Efecto para mostrar o no el logueo/register
-  // useEffect(()=>{
-  //   const token = sessionStorage.getItem("accessToken");
-  //   if (token) {
-  //     console.log(token);
-  //   } else {
-  //     setShowLogin(true);
-  //   }
-  // },[]);
 
   return (
     <>
