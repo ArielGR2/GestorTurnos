@@ -32,9 +32,9 @@ export class TurnosController {
         return await this.turnosService.modificarTurno(nuevoTurno, IdDeTurnoAModificar)
     }
 
-    @Delete()
-    async eliminarTurno() {
-
+    @Delete('/:EliminarTurno')
+    async eliminarTurno(@Param() idTurnoAEliminar: number) {
+        return await this.turnosService.eliminarTurno(idTurnoAEliminar);
     }
 
 

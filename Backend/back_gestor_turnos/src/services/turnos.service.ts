@@ -17,9 +17,9 @@ export class TurnosService {
     const resultQuery: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDia, [fechaQueElUsrEstaViendo, fechaQueElUsrVe]);
     
     //Tenemos que ver la forma de que en el Front cada turno se visualice donde corresponda
-    const resultTotalTurnosDisponibles1dia1hora1andarivel = resultQuery.map((rs: RowDataPacket) => {
+    
       return 
-    })
+    
 
     if (resultQuery) {
       return 4 //returno la cantidad de turnos libres;
@@ -58,8 +58,8 @@ export class TurnosService {
 
   };
 
-  async eliminarTurno(body: TurnoDTO): Promise<any> {
-    const resultQuery = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, []);
+  async eliminarTurno(idTurnoAEliminar: number)  {
+    const resultQuery = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [idTurnoAEliminar]);
   };
 
 

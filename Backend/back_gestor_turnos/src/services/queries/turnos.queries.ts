@@ -1,7 +1,7 @@
 const turnosQueries = {
   //En caso de no poder conseguir los turnos libres por dia, ver la forma de retornar la ocupacion y tomar el 0 como indicador de que no se pueden reservar mas turnos
-  getAllTurnosLibresPorDia: 'Partiendo de la fecha en que el usuario este viendo en la pantalla// definir la query correcta para traer de la tabla la cantidad de turnos libres para visualizar en el front y que el usuario sepa que esos son los que puede reservar - Aqui deberiamos tener algun SELECT COUNT para agrupar los turnos de un mismo dia + mismo andarivel + misma hora;',
-
+  //'Partiendo de la fecha en que el usuario este viendo en la pantalla// definir la query correcta para traer de la tabla la cantidad de turnos libres para visualizar en el front y que el usuario sepa que esos son los que puede reservar - Aqui deberiamos tener algun SELECT COUNT para agrupar los turnos de un mismo dia + mismo andarivel + misma hora;'
+  getAllTurnosLibresPorDia: 'select count(*) from t_calendario_dia tcd join t_disciplina td on tcd.disciplinaId  = td.disciplinaId where tcd.fechaCalendario like  "2024-06-24" and tcd.turno_andarivel3 is null and td.horarioDeInicioDisciplina = 8;',
 
   reservaTurno: 'definir la query correcta;',
 
