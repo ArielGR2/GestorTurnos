@@ -12,32 +12,45 @@ export class TurnosService {
 
   async visualizarTurnosLibresParaReservarPorDia(fechaQueElUsrEstaViendo: Date, fechaQueElUsrVe: Date): Promise<number> {
     //getAllTurnosLibresPorDia deberia retornar el valor disponible de turnos para 1 dia + 1 hora + 1 andarivel sumando los null que se alojan en la T_calendario
-
     //la Query getAllTurnosLibresPorDia debe retornoarnos la couenta de turnos libres para 1 dia + 1 hora + un andarivel
     const resultQuery: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDia, [fechaQueElUsrEstaViendo, fechaQueElUsrVe]);
-    
     //Tenemos que ver la forma de que en el Front cada turno se visualice donde corresponda
-    
-      return 
-    
-
-    if (resultQuery) {
-      return 4 //returno la cantidad de turnos libres;
-    }
-    return 0;
+    return 4 //returno la cantidad de turnos libres;
   };
 
-  async reservarTurno(body: TurnoDTO): Promise<string> {
-    const resultQuery = await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
-      body.andarivelSeleccionado,
-      body.fechaTurno,
-      body.horaTurno,
-      body.usuarioId]);
+  async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
+    const resultQuery: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
+      datosNuevoTurno.andarivelSeleccionado,
+      datosNuevoTurno.fechaTurno,
+      datosNuevoTurno.horaTurno,
+      datosNuevoTurno.usuarioId]);
 
-    if (resultQuery) {
-      return "Turno reservado con exito"
+    if (!resultQuery) {
+      throw new HttpException("Error al crear el turno, intente de nuevo", HttpStatus.BAD_REQUEST);
     };
+    //Suponemos que en ultimoTurnoId vamos a tener un numero que representa el ID del ultimo turno
+    const ultimoTurnoId: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.obtenerUltimoTurnoId, [
+      datosNuevoTurno.andarivelSeleccionado,
+      datosNuevoTurno.fechaTurno,
+      datosNuevoTurno.horaTurno,
+      datosNuevoTurno.usuarioId
+    ]);
+
+    const idCalendarioNull: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.obtenerIdCalendario, [
+      datosNuevoTurno.andarivelSeleccionado,
+      datosNuevoTurno.fechaTurno,
+      datosNuevoTurno.horaTurno,
+      datosNuevoTurno.usuarioId])
+
+
+    await this.databaseService.executeQuery(turnosQueries.actualizarTablaCalendario, [ultimoTurnoId, idCalendarioNull])
+
+    return "Turno reservado con exito"
   };
+
+
+
+
 
   //En TurnoDTO recibimos los datos que el usuario quiere modificar en el turno. 
   //Esos datos los reemplazamos en la Base de datos con la query modificarTurnoById
@@ -58,7 +71,7 @@ export class TurnosService {
 
   };
 
-  async eliminarTurno(idTurnoAEliminar: number)  {
+  async eliminarTurno(idTurnoAEliminar: number) {
     const resultQuery = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [idTurnoAEliminar]);
   };
 

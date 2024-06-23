@@ -20,9 +20,10 @@ export class TurnosController {
     };
 
     @Post()
-    async reservarTurno(@Body() body: TurnoDTO): Promise<string> {
-        return await this.turnosService.reservarTurno(body);
+    async reservarTurno(@Body() datosNuevoTurno: TurnoDTO): Promise<string> {
+        return await this.turnosService.reservarTurno(datosNuevoTurno);
     };
+
 
     @Put('/:turnoId')
     //Para llegar a modificar el usuario primero debe haber seleccionado 1 turno a cambiar
@@ -30,12 +31,12 @@ export class TurnosController {
     //En el Body recibimos los nuevos datos para modificar el turno existente
     async modificarTurno(@Body() nuevoTurno: TurnoDTO, @Param('turnoId') IdDeTurnoAModificar: number): Promise<TurnoDTO> {
         return await this.turnosService.modificarTurno(nuevoTurno, IdDeTurnoAModificar)
-    }
+    };
 
     @Delete('/:EliminarTurno')
     async eliminarTurno(@Param() idTurnoAEliminar: number) {
         return await this.turnosService.eliminarTurno(idTurnoAEliminar);
-    }
+    };
 
 
 }
