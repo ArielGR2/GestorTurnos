@@ -7,13 +7,15 @@ import { LoginService } from './services/login.service';
 import { DatabaseService } from './services/db.service';
 import { RegisterController } from './controllers/register.controller';
 import { RegisterService } from './services/register.service';
+import { TurnosController } from './controllers/turnos.controller';
+import { TurnosService } from './services/turnos.service';
 
 @Module({
   imports: [JwtModule.register({
     secret:'sdhsdjh',
     signOptions: {expiresIn:"1h"},
   })],
-  controllers: [AppController, LoginController, RegisterController],
-  providers: [AppService, LoginService,DatabaseService, RegisterService],
+  controllers: [AppController, LoginController, RegisterController, TurnosController],
+  providers: [AppService, LoginService,DatabaseService, RegisterService, TurnosService],
 })
 export class AppModule {}

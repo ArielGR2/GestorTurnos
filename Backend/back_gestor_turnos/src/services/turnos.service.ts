@@ -1,21 +1,23 @@
 import { Body, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { DatabaseService } from './db.service';
 import turnosQueries from './queries/turnos.queries';
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-import * as bcrypt from 'bcryptjs';
 import TurnoDTO from 'src/dto/turnos.dto';
+import FechaDTO from 'src/dto/fecha.dto';
 
 @Injectable()
 export class TurnosService {
   constructor(private databaseService: DatabaseService) { }
 
-  async visualizarTurnosLibresParaReservarPorDia(fechaQueElUsrEstaViendo: Date, fechaQueElUsrVe: Date): Promise<number> {
+  async visualizarTurnosLibresParaReservarPorDia(fechaActual: FechaDTO): Promise<number> {
     //getAllTurnosLibresPorDia deberia retornar el valor disponible de turnos para 1 dia + 1 hora + 1 andarivel sumando los null que se alojan en la T_calendario
     //la Query getAllTurnosLibresPorDia debe retornoarnos la couenta de turnos libres para 1 dia + 1 hora + un andarivel
-    const resultQuery: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDia, [fechaQueElUsrEstaViendo, fechaQueElUsrVe]);
+    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDia, [fechaActual.fechaActual]);
+    console.log(fechaActual)
+    const valor = JSON.parse(JSON.stringify(cuenta))
+    //console.log(typeof(valor[0].total))
     //Tenemos que ver la forma de que en el Front cada turno se visualice donde corresponda
-    return 4 //returno la cantidad de turnos libres;
+    return valor[0].total ;//returno la cantidad de turnos libres;
   };
 
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
