@@ -3,16 +3,16 @@ import { DatabaseService } from './db.service';
 import turnosQueries from './queries/turnos.queries';
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import TurnoDTO from 'src/dto/turnos.dto';
-import FechaDTO from 'src/dto/fecha.dto';
+import FechayHoraDTO from 'src/dto/fechayhora.dto';
 
 @Injectable()
 export class TurnosService {
   constructor(private databaseService: DatabaseService) { }
-
-  async visualizarTurnosLibresParaReservarPorDia(fechaActual: FechaDTO): Promise<number> {
+  
+  async turnosLibresAnd1(fechaActual: FechayHoraDTO): Promise<number> {
     //getAllTurnosLibresPorDia deberia retornar el valor disponible de turnos para 1 dia + 1 hora + 1 andarivel sumando los null que se alojan en la T_calendario
     //la Query getAllTurnosLibresPorDia debe retornoarnos la couenta de turnos libres para 1 dia + 1 hora + un andarivel
-    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDia, [fechaActual.fechaActual]);
+    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDiaAnd1, [fechaActual.fechaActual, fechaActual.horaActual]);
     console.log(fechaActual)
     const valor = JSON.parse(JSON.stringify(cuenta))
     //console.log(typeof(valor[0].total))
@@ -20,32 +20,66 @@ export class TurnosService {
     return valor[0].total ;//returno la cantidad de turnos libres;
   };
 
+  async turnosLibresAnd2(fechaActual: FechayHoraDTO): Promise<number> {
+    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDiaAnd2, [fechaActual.fechaActual, fechaActual.horaActual]);
+    console.log(fechaActual)
+    const valor = JSON.parse(JSON.stringify(cuenta))
+    return valor[0].total ;
+  };
+
+  async turnosLibresAnd3(fechaActual: FechayHoraDTO): Promise<number> {
+    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDiaAnd3, [fechaActual.fechaActual, fechaActual.horaActual]);
+    console.log(fechaActual)
+    const valor = JSON.parse(JSON.stringify(cuenta))
+    return valor[0].total ;
+  };
+
+  async turnosLibresAnd4(fechaActual: FechayHoraDTO): Promise<number> {
+    const cuenta = await this.databaseService.executeSelect(turnosQueries.getAllTurnosLibresPorDiaAnd4, [fechaActual.fechaActual, fechaActual.horaActual]);
+    console.log(fechaActual)
+    const valor = JSON.parse(JSON.stringify(cuenta))
+    return valor[0].total ;
+  };
+
+
+
+
+
+
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
+    
     const resultQuery: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
-      datosNuevoTurno.andarivelSeleccionado,
       datosNuevoTurno.fechaTurno,
       datosNuevoTurno.horaTurno,
+      datosNuevoTurno.andarivelSeleccionado,
       datosNuevoTurno.usuarioId]);
 
     if (!resultQuery) {
       throw new HttpException("Error al crear el turno, intente de nuevo", HttpStatus.BAD_REQUEST);
     };
-    //Suponemos que en ultimoTurnoId vamos a tener un numero que representa el ID del ultimo turno
+
+   // Suponemos que en ultimoTurnoId vamos a tener un numero que representa el ID del ultimo turno
     const ultimoTurnoId: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.obtenerUltimoTurnoId, [
       datosNuevoTurno.andarivelSeleccionado,
       datosNuevoTurno.fechaTurno,
       datosNuevoTurno.horaTurno,
       datosNuevoTurno.usuarioId
     ]);
+    
+    const ultimoIdDeTurno = JSON.parse(JSON.stringify(ultimoTurnoId));
+    console.log("id de turno"+ultimoIdDeTurno[0].total);
 
-    const idCalendarioNull: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.obtenerIdCalendario, [
-      datosNuevoTurno.andarivelSeleccionado,
+    const idCalendarioNull: RowDataPacket[] = await this.databaseService.executeSelect(turnosQueries.obtenerIdCalendarioAnd1, [
+      // datosNuevoTurno.andarivelSeleccionado,
       datosNuevoTurno.fechaTurno,
       datosNuevoTurno.horaTurno,
-      datosNuevoTurno.usuarioId])
+      // datosNuevoTurno.usuarioId
+      ])
 
+    const ultimoIdDeCalendarioNull = JSON.parse(JSON.stringify(idCalendarioNull));
+    console.log("id de calendario"+ultimoIdDeCalendarioNull[0].total);
 
-    await this.databaseService.executeQuery(turnosQueries.actualizarTablaCalendario, [ultimoTurnoId, idCalendarioNull])
+    await this.databaseService.executeQuery(turnosQueries.actualizarTablaCalendario, [ultimoIdDeTurno[0].total, ultimoIdDeCalendarioNull[0].total]);
 
     return "Turno reservado con exito"
   };
