@@ -22,6 +22,7 @@ export class LoginService {
                 return {
                     username: usuarioDB.username,
                     rolId: usuarioDB.rolId,
+                    usuarioId: usuarioDB.usuarioId
                 };
             };
             return null;
@@ -42,13 +43,16 @@ export class LoginService {
             username: result['username'],
             password: result['password'],
             rolId: result['rolId'],
+            usuarioId: result['usuarioId']
         };
     };
 
     login(user: UserLoginDTO) {
         const payload = {
             username: user.username,
-            rolId: user.rolId
+            rolId: user.rolId,
+            usuarioId: user.usuarioId
+
         };
         return { accessToken: this.jwtService.sign(payload), };
     };
