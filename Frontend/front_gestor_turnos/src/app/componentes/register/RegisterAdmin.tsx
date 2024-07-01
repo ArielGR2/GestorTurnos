@@ -28,9 +28,10 @@ export const RegisterAdministrador = () => {
     alert("Nuevo Admin Registrado");
   };
 
+
   return (
     <>
-      <form onSubmit={handleRegister} className='formLogin'>
+      <form onSubmit={handleRegister} className='formLogin' onLoad={}>
         <div className='divLogin'>
           <h2>Registrar Administrador</h2>
           <label>Ingrese nuevo Profesor:</label>
