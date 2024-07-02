@@ -1,4 +1,4 @@
-"use client"
+
 import { useRouter } from "next/navigation";
 
 export default function withRoles(Componente: any, permisosRequeridos: number[], goBackRoute: string) {
