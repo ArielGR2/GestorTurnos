@@ -6,7 +6,7 @@ const turnosQueries = {
 
   eliminarTurno: 'delete from t_turnos tt where tt.fechaTurno = ? and tt.horaTurno = ? and tt.andarivelSeleccionado = ? and tt.usuarioId=? ;',
 
-  
+  muestraTurnoReservadoPorId: 'select * from t_turnos tt where usuarioId = ? and fechaTurno = ?',
 }
 
 export default turnosQueries;

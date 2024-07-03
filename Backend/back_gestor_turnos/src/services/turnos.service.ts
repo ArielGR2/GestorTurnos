@@ -10,11 +10,10 @@ export class TurnosService {
 
   async mostrarLibres(fechaActual: TurnoDTO): Promise<number> {
     const cuenta = await this.databaseService.executeSelect(turnosQueries.contarTurnosOcupados, [fechaActual.fechaTurno, fechaActual.horaTurno, fechaActual.andarivelSeleccionado]);
-    console.log(fechaActual)
+    // console.log(fechaActual)
     const valor = JSON.parse(JSON.stringify(cuenta))
     return valor[0].ocupados;
   };
-
 
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
     const cuenta = await this.databaseService.executeSelect(turnosQueries.contarTurnosOcupados, [
@@ -24,10 +23,10 @@ export class TurnosService {
 
     const aux = JSON.parse(JSON.stringify(cuenta))
     aux[0].ocupados;
-    console.log(aux[0].ocupados);
+    // console.log(aux[0].ocupados);
 
     if (aux[0].ocupados > -1 && aux[0].ocupados < 4) {
-      console.log("Entró al if");
+      // console.log("Entró al if");
       await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
         datosNuevoTurno.fechaTurno,
         datosNuevoTurno.horaTurno,
@@ -38,6 +37,7 @@ export class TurnosService {
       throw new HttpException("Error al crear el turno, intente de nuevo", HttpStatus.BAD_REQUEST);
     };
   }
+
   async eliminarTurno(eliminarTurno: TurnoDTO): Promise<string> {
     const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [
       eliminarTurno.fechaTurno,
@@ -50,12 +50,16 @@ export class TurnosService {
     } else {
       return "Se borró el Turno"
     }
-
-
-
   }
 
+  async muestraTurnoReservadoPorId(datosTurno: TurnoDTO): Promise<any> {
+    const cuenta2 = await this.databaseService.executeSelect(turnosQueries.muestraTurnoReservadoPorId, [
+      datosTurno.usuarioId,
+      datosTurno.fechaTurno,
+    ]);
 
+    return cuenta2
+  }
 };
 
 

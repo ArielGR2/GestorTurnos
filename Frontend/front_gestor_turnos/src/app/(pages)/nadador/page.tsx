@@ -46,10 +46,6 @@ const Nadador = () => {
     return fecha.format('YYYY-MM-DD')
   }
 
-  /* useEffect(() => {
-    console.log("fecha dentro del Effect: " + muestraFecha());
-  }, [fecha]); */
-
 
   return (
     <>
@@ -62,7 +58,10 @@ const Nadador = () => {
 
 
         <div className='cuadroygrilla'>
-          <CuadroTurno/>
+          <CuadroTurno 
+            fechaTurno={fecha}
+            usuarioId={obtenerUsuario().usuarioId}
+          />
           <Grilla 
             //key={1}
             fechaTurno={fecha}
