@@ -43,7 +43,8 @@ export class LoginService {
             username: result['username'],
             password: result['password'],
             rolId: result['rolId'],
-            usuarioId: result['usuarioId']
+            usuarioId: result['usuarioId'],
+
         };
     };
 
@@ -52,7 +53,6 @@ export class LoginService {
             username: user.username,
             rolId: user.rolId,
             usuarioId: user.usuarioId
-
         };
         return { accessToken: this.jwtService.sign(payload), };
     };

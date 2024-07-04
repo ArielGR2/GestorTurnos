@@ -18,14 +18,14 @@ export class DatabaseService {
     });
   };
 
-  executeQuery = async (sql: string, param: any[]): Promise<ResultSetHeader> => {
+  executeQuery = async (sql: string, param: any[],): Promise<ResultSetHeader> => {
     const connection: PoolConnection = await this.pool.getConnection();
     const [result]: [ResultSetHeader, FieldPacket[]] = await connection.query<ResultSetHeader>(sql, param);
     this.pool.releaseConnection(connection);
     return result;
   };
 
-  executeSelect = async (sql: string, param: any[]): Promise<RowDataPacket[]> => {
+  executeSelect = async (sql: string, param: any[],): Promise<RowDataPacket[]> => {
     const connection: PoolConnection = await this.pool.getConnection();
     const [result]: [RowDataPacket[], FieldPacket[]] = await connection.query<RowDataPacket[]>(sql, param);
     this.pool.releaseConnection(connection);

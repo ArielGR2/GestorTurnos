@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, HttpException, HttpStatus, Post } from "@nestjs/common";
 import TurnoDTO from "src/dto/turnos.dto";
 import { TurnosService } from "src/services/turnos.service";
 
@@ -14,14 +14,18 @@ export class TurnosController {
     };
 
     @Post('/reserva')
-    async reservarTurno(@Body() datosNuevoTurno: TurnoDTO): Promise<string> {
+    async reservarTurno(@Body() datosNuevoTurno: any): Promise<string> {
         return await this.turnosService.reservarTurno(datosNuevoTurno);
     };
 
     @Delete('/eliminar')
-    async eliminarTurno(@Body() eliminarTurno: TurnoDTO ): Promise<string>{
-        return await this.turnosService.eliminarTurno(eliminarTurno);
+    async eliminarTurno(@Body() turno: any): Promise<void | string> {
+        if (!turno || !turno.fechaTurno || !turno.horaTurno || !turno.andarivelSeleccionado || !turno.usuarioId) {
+            throw new HttpException('Datos incompletos', HttpStatus.BAD_REQUEST);
+        }
+        return await this.turnosService.eliminarTurno(turno);
     }
+
     @Post('/muestraTurnoReservado') //Para mostrar el turno que tenga reservado por dia por usuariId
     async muestraTurnoreservadoPorId(@Body() datosTurno: any): Promise<any> {
         return await this.turnosService.muestraTurnoReservadoPorId(datosTurno);

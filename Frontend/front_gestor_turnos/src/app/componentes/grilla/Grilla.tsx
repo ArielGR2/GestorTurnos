@@ -7,9 +7,10 @@ import { iTurno } from "@/app/model/iTurno";
 
 export const Grilla = (props: any) => {
 
-  const { fechaTurno, usuarioId } = props;
+  const { fechaTurno, usuarioId, actualizarTurnoReservado  } = props;
 
   const [mostrar, setMostrar] = useState<any[]>([]);
+  const [turno, setTurno] = useState<{}>({});
 
   const visualizarTurnos = async () => {
     const auxturnos = [];
@@ -29,15 +30,17 @@ export const Grilla = (props: any) => {
     return auxturnos;
   };
 
-  const handleClick = (e: any) => {
-    const { name, value } = e.target;
+  const handleClick = async (horaTurno: number, andarivelSeleccionado: number) => {
     const turno: iTurno = {
       fechaTurno: fechaTurno.format("YYYY-MM-DD"),
-      horaTurno: name,
-      andarivelSeleccionado: value,
+      horaTurno: horaTurno,
+      andarivelSeleccionado: andarivelSeleccionado,
       usuarioId: usuarioId,
     };
-    reservarTurno(turno);
+    setTurno(turno);
+    await reservarTurno(turno);
+    actualizarTurnoReservado(turno);
+    
     /* } */
   };
 
@@ -47,7 +50,7 @@ export const Grilla = (props: any) => {
       setMostrar(await visualizarTurnos());
     };
     aux();
-  }, [fechaTurno]);
+  }, [fechaTurno, turno]);
 
   return (
     <>
@@ -69,7 +72,7 @@ export const Grilla = (props: any) => {
                 {objetoHora.andariveles.map(
                   (ocupados: number, index: number) => (
                     <td key={index}>
-                      <button onClick={handleClick}> Reserva</button>
+                      <button onClick={() => handleClick(objetoHora.hora, index + 1)}> Reserva</button>
                       {ocupados}
                     </td>
                   )

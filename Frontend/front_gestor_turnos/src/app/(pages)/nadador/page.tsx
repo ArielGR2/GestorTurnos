@@ -4,14 +4,13 @@ import withRoles from "../../componentes/HOC/WithRoles"
 import React, { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { Grilla } from '@/app/componentes/grilla/Grilla'
-import { mostrarLibres } from '@/app/services/GestorTurnos'
-import { iTurno } from '@/app/model/iTurno'
 import moment from 'moment'
 import { CuadroTurno } from '@/app/componentes/cuadroTurno/CuadroTurno'
 
 const Nadador = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [fecha, setFecha] = useState(moment());
+  const [turnoReservado, setTurnoReservado] = useState(null);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -46,6 +45,10 @@ const Nadador = () => {
     return fecha.format('YYYY-MM-DD')
   }
 
+  const actualizarTurnoReservado = (turno:any) => {
+    setTurnoReservado(turno);
+  }
+
 
   return (
     <>
@@ -61,11 +64,14 @@ const Nadador = () => {
           <CuadroTurno 
             fechaTurno={fecha}
             usuarioId={obtenerUsuario().usuarioId}
+            turnoReservado={turnoReservado} 
+            actualizarTurnoReservado={actualizarTurnoReservado} 
           />
           <Grilla 
             //key={1}
             fechaTurno={fecha}
             usuarioId={obtenerUsuario().usuarioId}
+            actualizarTurnoReservado={actualizarTurnoReservado} 
           />
         </div>
       </div>
