@@ -26,7 +26,7 @@ export const reservarTurno = async (turno: iTurno): Promise<any> => {
 
 export const eliminarTurno = async (turno: any): Promise<any> => {
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/eliminar", turno)
+    const response: AxiosResponse<any, any> = await clienteAxios.delete("/turnos/eliminar", turno)
     return response.data
   } catch  (error) {
     alert('No se eliminar el turno');
@@ -34,9 +34,10 @@ export const eliminarTurno = async (turno: any): Promise<any> => {
   };
 };
 
-export const muestraTurnoReservado = async (turno: iTurno): Promise<any> => {
+export const muestraTurnoReservado = async (turno: any): Promise<any> => {
   try {
     const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/muestraTurnoReservado", turno)
+    console.log("Axios Gestor Turnos", response.data);
     return response.data
   } catch  (error) {
     alert('No se pudo traer el turno');

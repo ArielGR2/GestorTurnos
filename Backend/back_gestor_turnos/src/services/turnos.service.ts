@@ -39,11 +39,12 @@ export class TurnosService {
   }
 
   async eliminarTurno(eliminarTurno: TurnoDTO): Promise<string> {
-    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [
+    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurnoById, [
       eliminarTurno.fechaTurno,
       eliminarTurno.horaTurno,
       eliminarTurno.andarivelSeleccionado,
-      eliminarTurno.usuarioId]);
+      eliminarTurno.usuarioId,
+    eliminarTurno.turnoId]);
 
     if (result.affectedRows == 0) {
       throw new HttpException("No se pudo eliminar", HttpStatus.NOT_FOUND);
@@ -52,7 +53,7 @@ export class TurnosService {
     }
   }
 
-  async muestraTurnoReservadoPorId(datosTurno: TurnoDTO): Promise<any> {
+  async muestraTurnoReservadoPorId(datosTurno: any): Promise<any> {
     const cuenta2 = await this.databaseService.executeSelect(turnosQueries.muestraTurnoReservadoPorId, [
       datosTurno.usuarioId,
       datosTurno.fechaTurno,

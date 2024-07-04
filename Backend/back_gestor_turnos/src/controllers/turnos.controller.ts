@@ -23,7 +23,7 @@ export class TurnosController {
         return await this.turnosService.eliminarTurno(eliminarTurno);
     }
     @Post('/muestraTurnoReservado') //Para mostrar el turno que tenga reservado por dia por usuariId
-    async muestraTurnoreservadoPorId(@Body() datosTurno: TurnoDTO): Promise<any> {
+    async muestraTurnoreservadoPorId(@Body() datosTurno: any): Promise<any> {
         return await this.turnosService.muestraTurnoReservadoPorId(datosTurno);
     };
 
