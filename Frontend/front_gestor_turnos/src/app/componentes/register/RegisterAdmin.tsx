@@ -31,7 +31,7 @@ export const RegisterAdministrador = () => {
 
   return (
     <>
-      <form onSubmit={handleRegister} className='formLogin' onLoad={}>
+      <form onSubmit={handleRegister} className='formLogin'>
         <div className='divLogin'>
           <h2>Registrar Administrador</h2>
           <label>Ingrese nuevo Profesor:</label>

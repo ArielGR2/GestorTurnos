@@ -43,6 +43,7 @@ export const CuadroTurno = (props: any) => {
         if (hola) {
             setMostrar1({}); 
             actualizarTurnoReservado(null);
+            visualizarTurnos()
         }
         return hola; 
     }
@@ -55,7 +56,7 @@ export const CuadroTurno = (props: any) => {
         };
         aux();
 
-    }, [fechaTurno, turnoReservado]);
+    }, [fechaTurno, turnoReservado, visualizarTurnos]);
 
     return (
         <div className='contenedorCuadro'>

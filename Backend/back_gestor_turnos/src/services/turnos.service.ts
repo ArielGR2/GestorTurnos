@@ -23,7 +23,7 @@ export class TurnosService {
 
     const aux = JSON.parse(JSON.stringify(cuenta))
     aux[0].ocupados;
-    // console.log(aux[0].ocupados);
+
 
     if (aux[0].ocupados > -1 && aux[0].ocupados < 4) {
       // console.log("Entró al if");

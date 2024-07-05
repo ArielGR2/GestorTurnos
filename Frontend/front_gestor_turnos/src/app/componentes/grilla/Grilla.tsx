@@ -37,11 +37,12 @@ export const Grilla = (props: any) => {
       andarivelSeleccionado: andarivelSeleccionado,
       usuarioId: usuarioId,
     };
-    setTurno(turno);
-    await reservarTurno(turno);
+    const response = await reservarTurno(turno);
+    console.log("hola response ",response);
+    console.log("hola turno ",turno);
+    setTurno(response);
     actualizarTurnoReservado(turno);
-    
-    /* } */
+    visualizarTurnos();
   };
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export const Grilla = (props: any) => {
       setMostrar(await visualizarTurnos());
     };
     aux();
-  }, [fechaTurno, turno]);
+  }, [fechaTurno, turno, visualizarTurnos]);
 
   return (
     <>
