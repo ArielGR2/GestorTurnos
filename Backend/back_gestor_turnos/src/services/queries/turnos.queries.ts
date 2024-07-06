@@ -6,7 +6,9 @@ const turnosQueries = {
 
   eliminarTurno: 'delete from t_turnos where fechaTurno = ? and horaTurno = ? and andarivelSeleccionado = ? and usuarioId = ? ;',
 
-  muestraTurnoReservadoPorId: 'select fechaTurno, horaTurno, andarivelSeleccionado, usuarioId from t_turnos tt where usuarioId = ? and fechaTurno = ?',
+  muestraTurnoReservadoPorId: 'select fechaTurno, horaTurno, andarivelSeleccionado, usuarioId from t_turnos where usuarioId = ? and fechaTurno = ?',
+
+  verificarTurnoUsuarioEnFecha: `  SELECT COUNT(*) as ocupados FROM t_turnos WHERE usuarioId = ? AND fechaTurno = ?;`
 
   // eliminarTurnoById: 'delete from t_turnos tt where turnoId = ? ;',
   

@@ -1,8 +1,9 @@
 'use client'
 import clienteAxios from "../services/Axios";
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { iTurno } from "../model/iTurno";
-// import { iUsuarioLogin } from "../model/iUsuario";
+
+
 
 export const mostrarLibres = async (turno: any): Promise<number> => {
   try {
@@ -16,22 +17,27 @@ export const mostrarLibres = async (turno: any): Promise<number> => {
 
 export const reservarTurno = async (turno: any): Promise<any> => {
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/reserva", turno );
+    const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/reserva", turno);
     return response.data;
-  } catch (error) {
-    alert('No se puede reservar el turno');
-    throw new Error('Error');
-  };
+  } catch (error: any) {
+    if (typeof error === 'string') {
+      if (error.includes('Ya tienes un turno reservado en esta fecha')) {
+        alert('No se puede reservar el turno: ya tienes un turno reservado en esta fecha.');
+      } else if (error.includes('Andarivel ocupado')) {
+        alert('No se puede reservar el turno: el andarivel está ocupado. Reserve otro turno.');
+      }
+    }
+  }
 };
 
 export const eliminarTurno = async (turno: any): Promise<any> => {
-  console.log("muestro turno en gestor turno front",turno);
+  console.log("muestro turno en gestor turno front", turno);
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.delete("turnos/eliminar", {data : turno});
-    console.log("solo response ",response);
-    console.log("response data",response.data);
+    const response: AxiosResponse<any, any> = await clienteAxios.delete("turnos/eliminar", { data: turno });
+    console.log("solo response ", response);
+    console.log("response data", response.data);
     return response.data;
-  } catch  (error) {
+  } catch (error) {
     alert('No se eliminar el turno');
     throw new Error('Error');
   };
@@ -41,7 +47,7 @@ export const muestraTurnoReservado = async (turno: iTurno): Promise<any> => {
   try {
     const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/muestraTurnoReservado", turno)
     return response.data
-  } catch  (error) {
+  } catch (error) {
     alert('No se pudo traer el turno');
     throw new Error('Error');
   };

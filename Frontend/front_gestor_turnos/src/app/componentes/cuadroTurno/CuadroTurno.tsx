@@ -43,7 +43,7 @@ export const CuadroTurno = (props: any) => {
         if (hola) {
             setMostrar1({}); 
             actualizarTurnoReservado(null);
-            visualizarTurnos()
+            visualizarTurnos();
         }
         return hola; 
     }

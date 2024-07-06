@@ -2,22 +2,8 @@
 import axios from 'axios';
 
 const clienteAxios = axios.create({
-  // baseURL: 'http://localhost:8080/api',
   baseURL: 'http://localhost:8080',
 });
-
-// const createCliente =()=> {
-//   const token = localStorage.getItem("accessToken");
-//   const cliente = axios.create({
-//     baseURL: 'http://localhost:8080',
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     }
-//   });
-//   return cliente;
-// };
-
-// const clienteAxios2 = createCliente();
 
 clienteAxios.interceptors.response.use(
   (response) => response,
@@ -31,6 +17,9 @@ clienteAxios.interceptors.response.use(
       if (error.response.data.errors) {
         return Promise.reject(error.response.data.errors[0].msg);
       }
+      if (error.response.data.message) {
+        return Promise.reject(error.response.data.message); // Cambiado para devolver el mensaje específico del backend
+      }
       return Promise.reject(error.response.data.msg);
     }
     if (status === 401) {
@@ -42,7 +31,7 @@ clienteAxios.interceptors.response.use(
     if (status === 500) {
       return Promise.reject('axios.errors.server');
     }
-    return null;
+    return Promise.reject(error.response); // Asegúrate de rechazar la respuesta para otros códigos de estado
   }
 );
 

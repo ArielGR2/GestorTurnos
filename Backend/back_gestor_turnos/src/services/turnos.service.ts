@@ -15,7 +15,27 @@ export class TurnosService {
     return valor[0].ocupados;
   };
 
+
+
+
+
+
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
+     // Verificar si el usuario ya tiene un turno en la misma fecha
+    const cuentaUsuario = await this.databaseService.executeSelect(turnosQueries.verificarTurnoUsuarioEnFecha, [
+      datosNuevoTurno.usuarioId,
+      datosNuevoTurno.fechaTurno
+    ]);
+
+    const auxUsuario = JSON.parse(JSON.stringify(cuentaUsuario));
+    auxUsuario[0].ocupados;
+
+    if (auxUsuario[0].ocupados > 0) {
+      // El usuario ya tiene un turno en la misma fecha
+      throw new HttpException("Ya tienes un turno reservado en esta fecha. No puedes reservar otro turno el mismo día.", HttpStatus.BAD_REQUEST);
+    }
+
+    // Contar turnos ocupados en el mismo andarivel y horario
     const cuenta = await this.databaseService.executeSelect(turnosQueries.contarTurnosOcupados, [
       datosNuevoTurno.fechaTurno,
       datosNuevoTurno.horaTurno,
@@ -26,7 +46,7 @@ export class TurnosService {
 
 
     if (aux[0].ocupados > -1 && aux[0].ocupados < 4) {
-      // console.log("Entró al if");
+      // Hay espacio disponible, puedo reservar
       await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
         datosNuevoTurno.fechaTurno,
         datosNuevoTurno.horaTurno,
@@ -34,9 +54,17 @@ export class TurnosService {
         datosNuevoTurno.usuarioId]);
       return "Turno reservado con éxito"
     } else {
-      throw new HttpException("Error al crear el turno, intente de nuevo", HttpStatus.BAD_REQUEST);
+      // Andarivel Ocupado
+      throw new HttpException("Andarivel ocupado. Reserve otro turno.", HttpStatus.BAD_REQUEST);
     };
   }
+
+
+
+
+
+
+
 
   async eliminarTurno(eliminarTurno: any): Promise<void | string> {
     const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [
@@ -57,8 +85,7 @@ export class TurnosService {
       datosTurno.usuarioId,
       datosTurno.fechaTurno,
     ]);
-
-    return cuenta2
+    return cuenta2;
   }
 };
 
