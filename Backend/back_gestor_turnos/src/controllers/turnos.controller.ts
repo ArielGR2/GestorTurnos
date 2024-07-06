@@ -31,4 +31,9 @@ export class TurnosController {
         return await this.turnosService.muestraTurnoReservadoPorId(datosTurno);
     };
 
+    @Post('/mostrarTurnosDelDia') 
+    async mostrarTurnosDelDia(@Body() fechaDelDia: any): Promise<any> {
+        return await this.turnosService.mostrarTurnosDelDia(fechaDelDia);
+    };
+
 }

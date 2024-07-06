@@ -15,11 +15,6 @@ export class TurnosService {
     return valor[0].ocupados;
   };
 
-
-
-
-
-
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
      // Verificar si el usuario ya tiene un turno en la misma fecha
     const cuentaUsuario = await this.databaseService.executeSelect(turnosQueries.verificarTurnoUsuarioEnFecha, [
@@ -44,7 +39,6 @@ export class TurnosService {
     const aux = JSON.parse(JSON.stringify(cuenta))
     aux[0].ocupados;
 
-
     if (aux[0].ocupados > -1 && aux[0].ocupados < 4) {
       // Hay espacio disponible, puedo reservar
       await this.databaseService.executeQuery(turnosQueries.reservaTurno, [
@@ -58,13 +52,6 @@ export class TurnosService {
       throw new HttpException("Andarivel ocupado. Reserve otro turno.", HttpStatus.BAD_REQUEST);
     };
   }
-
-
-
-
-
-
-
 
   async eliminarTurno(eliminarTurno: any): Promise<void | string> {
     const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurno, [
@@ -86,6 +73,14 @@ export class TurnosService {
       datosTurno.fechaTurno,
     ]);
     return cuenta2;
+  }
+
+  async mostrarTurnosDelDia(fechaDelDia: any): Promise<any> {
+    console.log(fechaDelDia)
+    const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia, 
+      [fechaDelDia.fechaTurno]
+    );
+    return turnosDelDia;
   }
 };
 

@@ -7,7 +7,7 @@ import { iTurno } from "@/app/model/iTurno";
 
 export const Grilla = (props: any) => {
 
-  const { fechaTurno, usuarioId, actualizarTurnoReservado  } = props;
+  const { fechaTurno, usuarioId, actualizarTurnoReservado } = props;
 
   const [mostrar, setMostrar] = useState<any[]>([]);
   const [turno, setTurno] = useState<{}>({});
@@ -38,8 +38,8 @@ export const Grilla = (props: any) => {
       usuarioId: usuarioId,
     };
     const response = await reservarTurno(turno);
-    console.log("hola response ",response);
-    console.log("hola turno ",turno);
+    console.log("hola response ", response);
+    console.log("hola turno ", turno);
     setTurno(response);
     actualizarTurnoReservado(turno);
     visualizarTurnos();

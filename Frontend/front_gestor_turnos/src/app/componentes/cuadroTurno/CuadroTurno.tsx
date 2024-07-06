@@ -55,7 +55,6 @@ export const CuadroTurno = (props: any) => {
             setMostrar1(turnoAux)
         };
         aux();
-
     }, [fechaTurno, turnoReservado, visualizarTurnos]);
 
     return (

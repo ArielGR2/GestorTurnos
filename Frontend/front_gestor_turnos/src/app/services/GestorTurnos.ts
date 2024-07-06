@@ -39,7 +39,7 @@ export const eliminarTurno = async (turno: any): Promise<any> => {
     return response.data;
   } catch (error) {
     alert('No se eliminar el turno');
-    throw new Error('Error');
+    throw new Error('Error al eliminar turno');
   };
 };
 
@@ -49,9 +49,20 @@ export const muestraTurnoReservado = async (turno: iTurno): Promise<any> => {
     return response.data
   } catch (error) {
     alert('No se pudo traer el turno');
-    throw new Error('Error');
+    throw new Error('Error al traer el turno reservado');
   };
+}
+export const mostrarTurnosDelDia = async (fechaDelDia: any): Promise<any> => {
+  try {
+    const response: AxiosResponse<any, any> = await clienteAxios.post("/turnos/mostrarTurnosDelDia", fechaDelDia);
+    return response;
+  } catch (error) {
+    alert("Error al hacer el GET de turnos del dia");
+    throw new Error("Error al hacer el Get de turnos del dia");
+  }
 };
+
+
 
 
 

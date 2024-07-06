@@ -22,7 +22,6 @@ const Nadador = () => {
       router.push('home')
     };
   };
-
   const obtenerUsuario = () => {
     const jwt = require('jsonwebtoken');
     const usuarioId: number | null = jwt.decode(sessionStorage.getItem('token')).usuarioId;
@@ -30,7 +29,6 @@ const Nadador = () => {
 
     return {usuarioId,username}
   }
-
   const sumaDia = () => {
     var auxFecha = fecha.clone().add(1, 'd')
     setFecha(auxFecha);
@@ -40,11 +38,9 @@ const Nadador = () => {
     var auxFecha = fecha.clone().subtract(1, 'd')
     setFecha(auxFecha)
   }
-
   const muestraFecha = () => {
     return fecha.format('YYYY-MM-DD')
   }
-
   const actualizarTurnoReservado = (turno:any) => {
     setTurnoReservado(turno);
   }
@@ -59,7 +55,6 @@ const Nadador = () => {
         <button onClick={sumaDia}>Siguiente</button>
         <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
 
-
         <div className='cuadroygrilla'>
           <CuadroTurno 
             fechaTurno={fecha}
@@ -68,7 +63,6 @@ const Nadador = () => {
             actualizarTurnoReservado={actualizarTurnoReservado} 
           />
           <Grilla 
-            //key={1}
             fechaTurno={fecha}
             usuarioId={obtenerUsuario().usuarioId}
             actualizarTurnoReservado={actualizarTurnoReservado} 
