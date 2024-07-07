@@ -76,7 +76,6 @@ export class TurnosService {
   }
 
   async mostrarTurnosDelDia(fechaDelDia: any): Promise<any> {
-    console.log(fechaDelDia)
     const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia, 
       [fechaDelDia.fechaTurno]
     );

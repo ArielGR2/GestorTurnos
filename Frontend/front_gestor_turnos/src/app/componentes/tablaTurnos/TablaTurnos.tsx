@@ -6,25 +6,34 @@ export const TablaTurnos = (props: any) => {
   const { fechaTurno } = props;
 
   const [mostrar, setMostrar] = useState<any[]>([]);
-  const [auxFechaTurno, setAuxFechaTurno] = useState<{}>({});
+  // const [auxTurnosFechaOK, setAuxTurnosFechaOK] = useState<any[]>([]);
 
   const visualizarTurnos = async () => {
     const auxTurnos = [];
+
     const nuevaFecha = fechaTurno.format("YYYY-MM-DD")
     console.log("nueva fechaaaa", nuevaFecha);
     const auxFechaTurno = {fechaTurno: nuevaFecha};
     const response = await mostrarTurnosDelDia(auxFechaTurno);
     auxTurnos.push(response);
-    console.log("ARREGLO AUXTURNO",auxTurnos)
-    return auxTurnos;
+    console.log("linea 19 ARREGLO AUXTURNO",auxTurnos[0].data);
+    // const arreglo = auxTurnos[0].data
+
+    // for (let i = 0; i < arreglo.length; i++) {
+    // setAuxTurnosFechaOK(arreglo[i].fechaTurno.format("YYYY-MM-DD"));
+    // // }
+    // console.log("linea 25",auxTurnosFechaOK);
+    return auxTurnos[0].data;
   };
+
+
 
   useEffect(() => {
     const aux = async () => {
       setMostrar(await visualizarTurnos());
     };
     aux();
-  }, []);
+  }, [fechaTurno]);
 
 
   return (
@@ -34,11 +43,11 @@ export const TablaTurnos = (props: any) => {
           <thead>
             <tr>
               <th>Turno ID</th>
-              <th>Fecha de Turno</th>
               <th>Hora de Turno</th>
               <th>Andarivel</th>
               <th>Usuario ID</th>
               <th>Presentismo</th>
+              <th>Accion</th>
             </tr>
           </thead>
 
@@ -46,11 +55,11 @@ export const TablaTurnos = (props: any) => {
             {mostrar.map((registro, index) => (
               <tr key={index}>
                 <td>{registro.turnoId}</td>
-                <td>{registro.fechaTurno}</td>
                 <td>{registro.horaTurno}</td>
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
-                <td>{registro.Presentismo}</td>
+                <td>{registro.Presentismo? "true" : "false"}</td>
+                <button>Dar Presente</button>
               </tr>
             ))}
           </tbody>
