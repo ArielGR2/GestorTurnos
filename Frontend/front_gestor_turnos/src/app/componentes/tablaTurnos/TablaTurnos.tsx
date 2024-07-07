@@ -48,6 +48,8 @@ export const TablaTurnos = (props: any) => {
               <th>Usuario ID</th>
               <th>Presentismo</th>
               <th>Accion</th>
+              <th>Actualizar</th>
+              
             </tr>
           </thead>
 
@@ -59,7 +61,8 @@ export const TablaTurnos = (props: any) => {
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
                 <td>{registro.Presentismo? "true" : "false"}</td>
-                <button>Dar Presente</button>
+                <td><button>Modificar Presentismo</button></td>
+                <td><button>Modificar Turno</button></td>
               </tr>
             ))}
           </tbody>
