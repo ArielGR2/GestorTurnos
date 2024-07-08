@@ -1,5 +1,6 @@
 "use client"
-import { mostrarTurnosDelDia } from '@/app/services/GestorTurnos';
+import { iTurno } from '@/app/model/iTurno';
+import { cambiarPresentismo, mostrarTurnosDelDia } from '@/app/services/GestorTurnos';
 import React, { useEffect, useState } from 'react'
 
 export const TablaTurnos = (props: any) => {
@@ -17,14 +18,22 @@ export const TablaTurnos = (props: any) => {
     const response = await mostrarTurnosDelDia(auxFechaTurno);
     auxTurnos.push(response);
     console.log("linea 19 ARREGLO AUXTURNO",auxTurnos[0].data);
-    // const arreglo = auxTurnos[0].data
-
-    // for (let i = 0; i < arreglo.length; i++) {
-    // setAuxTurnosFechaOK(arreglo[i].fechaTurno.format("YYYY-MM-DD"));
-    // // }
-    // console.log("linea 25",auxTurnosFechaOK);
     return auxTurnos[0].data;
+
   };
+  const handleClick = async (turnoId: number) => {
+    console.log("Entro al handleClick" + turnoId  );
+    const turno: iTurno = {
+      turnoId : turnoId
+      //fechaTurno: fechaTurno.format("YYYY-MM-DD"),
+      
+    };
+    console.log("Turno quedó: " + turno.turnoId  );
+    const response = await cambiarPresentismo(turno.turnoId);
+      
+    visualizarTurnos();
+  };
+
 
 
 
@@ -61,8 +70,8 @@ export const TablaTurnos = (props: any) => {
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
                 <td>{registro.Presentismo? "true" : "false"}</td>
-                <td><button>Modificar Presentismo</button></td>
-                <td><button>Modificar Turno</button></td>
+                <td><button onClick={() => handleClick(registro.turnoId)} >Cambiar Presentismo</button></td>
+                <td><button  id={registro.turnoId} >Eliminar Turno</button></td>
               </tr>
             ))}
           </tbody>

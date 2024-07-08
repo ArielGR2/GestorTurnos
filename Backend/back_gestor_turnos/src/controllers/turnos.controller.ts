@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Post } from "@nestjs/common";
+import { Body, Controller, Delete, HttpException, HttpStatus, Patch, Post, Put} from "@nestjs/common";
 import TurnoDTO from "src/dto/turnos.dto";
 import { TurnosService } from "src/services/turnos.service";
 
@@ -31,9 +31,15 @@ export class TurnosController {
         return await this.turnosService.muestraTurnoReservadoPorId(datosTurno);
     };
 
-    @Post('/mostrarTurnosDelDia') 
+    @Post('/mostrarTurnosDelDia')
     async mostrarTurnosDelDia(@Body() fechaDelDia: any): Promise<any> {
         return await this.turnosService.mostrarTurnosDelDia(fechaDelDia);
     };
+
+    @Put('/cambiarPresentismo')
+    async cambiarPresentismo(@Body() turnoId: number): Promise<any> {
+        return await this.turnosService.cambiarPresentismo(turnoId);
+    };
+
 
 }

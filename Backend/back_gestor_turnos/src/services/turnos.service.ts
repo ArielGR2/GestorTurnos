@@ -81,6 +81,15 @@ export class TurnosService {
     );
     return turnosDelDia;
   }
+
+  async cambiarPresentismo(turnoId: number): Promise<any> {
+    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [
+   turnoId ]);
+
+
+  }
+
+
 };
 
 

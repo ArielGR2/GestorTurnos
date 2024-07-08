@@ -62,6 +62,21 @@ export const mostrarTurnosDelDia = async (fechaDelDia: any): Promise<any> => {
   }
 };
 
+export const cambiarPresentismo = async (turnoId: any): Promise<any> => {
+  console.log("En Axios linea 66: "+ turnoId);
+  console.log( typeof( turnoId));
+
+
+  try {
+  const response: AxiosResponse<any, any> = await clienteAxios.patch("/turnos/cambiarPresentismo", turnoId);
+  console.log("response: "+ response.data)  
+  return response.data ;
+
+  
+} catch (error) {
+  
+}
+}
 
 
 

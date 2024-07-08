@@ -10,7 +10,9 @@ const turnosQueries = {
 
   verificarTurnoUsuarioEnFecha: `SELECT COUNT(*) as ocupados FROM t_turnos WHERE usuarioId = ? AND fechaTurno = ?;`,
 
-  muestraTurnosDelDia: `select * from t_turnos where fechaTurno = ?;`
+  muestraTurnosDelDia: `select * from t_turnos where fechaTurno = ?;`,
+
+  cambiarPresentismo: ` update t_turnos set presentismo = false where turnoId = ?; `
   
 }
 
