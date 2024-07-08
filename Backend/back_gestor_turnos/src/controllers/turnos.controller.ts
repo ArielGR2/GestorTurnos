@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Patch, Post, Put} from "@nestjs/common";
+import { Body, Controller, Delete, HttpException, HttpStatus, Param, Patch, Post, Put} from "@nestjs/common";
 import TurnoDTO from "src/dto/turnos.dto";
 import { TurnosService } from "src/services/turnos.service";
 
@@ -37,7 +37,7 @@ export class TurnosController {
     };
 
     @Put('/cambiarPresentismo')
-    async cambiarPresentismo(@Body() turnoId: number): Promise<any> {
+    async cambiarPresentismo(@Body() turnoId: TurnoDTO): Promise<any> {
         return await this.turnosService.cambiarPresentismo(turnoId);
     };
 

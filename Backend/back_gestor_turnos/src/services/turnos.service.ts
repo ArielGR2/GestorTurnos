@@ -16,7 +16,7 @@ export class TurnosService {
   };
 
   async reservarTurno(datosNuevoTurno: TurnoDTO): Promise<string> {
-     // Verificar si el usuario ya tiene un turno en la misma fecha
+    // Verificar si el usuario ya tiene un turno en la misma fecha
     const cuentaUsuario = await this.databaseService.executeSelect(turnosQueries.verificarTurnoUsuarioEnFecha, [
       datosNuevoTurno.usuarioId,
       datosNuevoTurno.fechaTurno
@@ -76,17 +76,17 @@ export class TurnosService {
   }
 
   async mostrarTurnosDelDia(fechaDelDia: any): Promise<any> {
-    const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia, 
+    const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia,
       [fechaDelDia.fechaTurno]
     );
     return turnosDelDia;
   }
 
-  async cambiarPresentismo(turnoId: number): Promise<any> {
+  async cambiarPresentismo(turnoId: TurnoDTO): Promise<any> {
     const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [
-   turnoId ]);
+      turnoId.turnoId]);
 
-
+    return result
   }
 
 

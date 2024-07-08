@@ -8,9 +8,9 @@ export class DatabaseService {
   constructor() {
     this.pool = createPool({
       // este puerto lo tenemos que tener igual con Ariel
-      port: 3366,
+      port: 3306,
       database: 'gestor_turnos',
-      password: 'root',
+      password: 'root123',
       host: 'localhost',
       user: 'root',
       // cantidad maxima de conexiones en el pool

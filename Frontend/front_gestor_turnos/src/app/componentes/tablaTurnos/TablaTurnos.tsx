@@ -11,39 +11,28 @@ export const TablaTurnos = (props: any) => {
 
   const visualizarTurnos = async () => {
     const auxTurnos = [];
-
     const nuevaFecha = fechaTurno.format("YYYY-MM-DD")
-    console.log("nueva fechaaaa", nuevaFecha);
-    const auxFechaTurno = {fechaTurno: nuevaFecha};
+    const auxFechaTurno = { fechaTurno: nuevaFecha };
     const response = await mostrarTurnosDelDia(auxFechaTurno);
     auxTurnos.push(response);
-    console.log("linea 19 ARREGLO AUXTURNO",auxTurnos[0].data);
     return auxTurnos[0].data;
 
   };
-  const handleClick = async (turnoId: number) => {
-    console.log("Entro al handleClick" + turnoId  );
+
+  const handleClick = async (turnoIdAux: number) => {
     const turno: iTurno = {
-      turnoId : turnoId
-      //fechaTurno: fechaTurno.format("YYYY-MM-DD"),
-      
+      turnoId: turnoIdAux
     };
-    console.log("Turno quedó: " + turno.turnoId  );
-    const response = await cambiarPresentismo(turno.turnoId);
-      
-    visualizarTurnos();
+    const response = await cambiarPresentismo(turno);
+    setMostrar(await visualizarTurnos());
   };
-
-
-
 
   useEffect(() => {
     const aux = async () => {
       setMostrar(await visualizarTurnos());
     };
     aux();
-  }, [fechaTurno]);
-
+  }, [fechaTurno, mostrar]);
 
   return (
     <>
@@ -58,7 +47,7 @@ export const TablaTurnos = (props: any) => {
               <th>Presentismo</th>
               <th>Accion</th>
               <th>Actualizar</th>
-              
+
             </tr>
           </thead>
 
@@ -69,9 +58,9 @@ export const TablaTurnos = (props: any) => {
                 <td>{registro.horaTurno}</td>
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
-                <td>{registro.Presentismo? "true" : "false"}</td>
+                <td>{registro.presentismo}</td>
                 <td><button onClick={() => handleClick(registro.turnoId)} >Cambiar Presentismo</button></td>
-                <td><button  id={registro.turnoId} >Eliminar Turno</button></td>
+                <td><button id={registro.turnoId} >Eliminar Turno</button></td>
               </tr>
             ))}
           </tbody>

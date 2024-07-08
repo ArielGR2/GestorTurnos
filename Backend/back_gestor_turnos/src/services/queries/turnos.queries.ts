@@ -1,7 +1,7 @@
 const turnosQueries = {
-  
-  contarTurnosOcupados:'select count(*) as ocupados from t_turnos where fechaTurno = ? and horaTurno = ? and andarivelSeleccionado = ?;',
-  
+
+  contarTurnosOcupados: 'select count(*) as ocupados from t_turnos where fechaTurno = ? and horaTurno = ? and andarivelSeleccionado = ?;',
+
   reservaTurno: 'insert into t_turnos (fechaTurno, horaTurno, andarivelSeleccionado, usuarioId) value (?, ?, ?, ?);',
 
   eliminarTurno: 'delete from t_turnos where fechaTurno = ? and horaTurno = ? and andarivelSeleccionado = ? and usuarioId = ?;',
@@ -12,8 +12,8 @@ const turnosQueries = {
 
   muestraTurnosDelDia: `select * from t_turnos where fechaTurno = ?;`,
 
-  cambiarPresentismo: ` update t_turnos set presentismo = false where turnoId = ?; `
-  
+  cambiarPresentismo: `UPDATE t_turnos SET presentismo = 0 WHERE turnoId = ?;`
+
 }
 
 export default turnosQueries;
