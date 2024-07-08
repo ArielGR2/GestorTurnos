@@ -19,11 +19,12 @@ export const TablaTurnos = (props: any) => {
 
   };
 
-  const handleClick = async (turnoIdAux: number) => {
+  const handleClick = async (turnoIdAux: number, presentismoAux: boolean) => {
     const turno: iTurno = {
-      turnoId: turnoIdAux
+      turnoId: turnoIdAux,
+      presentismo: !presentismoAux
     };
-    const response = await cambiarPresentismo(turno);
+    await cambiarPresentismo(turno);
     setMostrar(await visualizarTurnos());
   };
 
@@ -47,7 +48,6 @@ export const TablaTurnos = (props: any) => {
               <th>Presentismo</th>
               <th>Accion</th>
               <th>Actualizar</th>
-
             </tr>
           </thead>
 
@@ -59,7 +59,7 @@ export const TablaTurnos = (props: any) => {
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
                 <td>{registro.presentismo}</td>
-                <td><button onClick={() => handleClick(registro.turnoId)} >Cambiar Presentismo</button></td>
+                <td><button onClick={() => handleClick(registro.turnoId, registro.presentismo)}>Cambiar Presentismo</button></td>
                 <td><button id={registro.turnoId} >Eliminar Turno</button></td>
               </tr>
             ))}

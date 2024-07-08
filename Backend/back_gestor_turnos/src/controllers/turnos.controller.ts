@@ -37,8 +37,8 @@ export class TurnosController {
     };
 
     @Put('/cambiarPresentismo')
-    async cambiarPresentismo(@Body() turnoId: TurnoDTO): Promise<any> {
-        return await this.turnosService.cambiarPresentismo(turnoId);
+    async cambiarPresentismo(@Body() turno: TurnoDTO): Promise<any> {
+        return await this.turnosService.cambiarPresentismo(turno);
     };
 
 

@@ -12,7 +12,7 @@ const turnosQueries = {
 
   muestraTurnosDelDia: `select * from t_turnos where fechaTurno = ?;`,
 
-  cambiarPresentismo: `UPDATE t_turnos SET presentismo = 0 WHERE turnoId = ?;`
+  cambiarPresentismo: `UPDATE t_turnos SET presentismo = ? WHERE turnoId = ?;`
 
 }
 

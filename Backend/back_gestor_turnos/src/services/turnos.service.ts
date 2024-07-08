@@ -82,9 +82,9 @@ export class TurnosService {
     return turnosDelDia;
   }
 
-  async cambiarPresentismo(turnoId: TurnoDTO): Promise<any> {
-    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [
-      turnoId.turnoId]);
+  async cambiarPresentismo(turno: TurnoDTO): Promise<any> {
+    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [turno.presentismo, 
+      turno.turnoId]);
 
     return result
   }

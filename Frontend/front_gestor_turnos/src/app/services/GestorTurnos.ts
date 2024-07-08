@@ -62,9 +62,9 @@ export const mostrarTurnosDelDia = async (fechaDelDia: any): Promise<any> => {
   }
 };
 
-export const cambiarPresentismo = async (turnoId: iTurno): Promise<any> => {
+export const cambiarPresentismo = async (turno: iTurno): Promise<any> => {
   try {
-    const response: AxiosResponse<any, any> = await clienteAxios.put("/turnos/cambiarPresentismo", turnoId);
+    const response: AxiosResponse<any, any> = await clienteAxios.put("/turnos/cambiarPresentismo", turno);
     return response.data;
   } catch (error) {
     console.error("Error en cambiarPresentismo:", error);
