@@ -34,11 +34,8 @@ export const eliminarTurno = async (turno: any): Promise<any> => {
   console.log("muestro turno en gestor turno front", turno);
   try {
     const response: AxiosResponse<any, any> = await clienteAxios.delete("turnos/eliminar", { data: turno });
-    console.log("solo response ", response);
-    console.log("response data", response.data);
     return response.data;
   } catch (error) {
-    alert('No se eliminar el turno');
     throw new Error('Error al eliminar turno');
   };
 };
@@ -70,6 +67,18 @@ export const cambiarPresentismo = async (turno: iTurno): Promise<any> => {
     console.error("Error en cambiarPresentismo:", error);
   }
 }
+
+export const eliminarTurnoPorId = async (turno: any): Promise<any> => {
+  try {
+    const response: AxiosResponse<any, any> = await clienteAxios.delete("turnos/eliminarTurnoPorId", { data: turno });
+
+    return response;
+
+  } catch (error) {
+
+    throw new Error('Error al eliminar turno');
+  };
+};
 
 
 

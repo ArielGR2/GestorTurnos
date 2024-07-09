@@ -1,6 +1,6 @@
 "use client"
 import { iTurno } from '@/app/model/iTurno';
-import { cambiarPresentismo, mostrarTurnosDelDia } from '@/app/services/GestorTurnos';
+import { cambiarPresentismo, eliminarTurnoPorId, mostrarTurnosDelDia } from '@/app/services/GestorTurnos';
 import React, { useEffect, useState } from 'react'
 
 export const TablaTurnos = (props: any) => {
@@ -19,7 +19,7 @@ export const TablaTurnos = (props: any) => {
 
   };
 
-  const handleClick = async (turnoIdAux: number, presentismoAux: boolean) => {
+  const handleClick_Cambia = async (turnoIdAux: number, presentismoAux: boolean) => {
     const turno: iTurno = {
       turnoId: turnoIdAux,
       presentismo: !presentismoAux
@@ -27,6 +27,19 @@ export const TablaTurnos = (props: any) => {
     await cambiarPresentismo(turno);
     setMostrar(await visualizarTurnos());
   };
+
+  const handleClick_Borra = async (turnoId: number) => {
+    const turno: iTurno = {
+      turnoId: turnoId
+    };
+    await eliminarTurnoPorId(turno);
+    setMostrar(await visualizarTurnos());
+  };
+
+
+
+
+
 
   useEffect(() => {
     const aux = async () => {
@@ -42,11 +55,12 @@ export const TablaTurnos = (props: any) => {
           <thead>
             <tr>
               <th>Turno ID</th>
+              <th>Nombre</th>
               <th>Hora de Turno</th>
               <th>Andarivel</th>
               <th>Usuario ID</th>
               <th>Presentismo</th>
-              <th>Accion</th>
+              <th>Estado Presentismo</th>
               <th>Actualizar</th>
             </tr>
           </thead>
@@ -55,12 +69,13 @@ export const TablaTurnos = (props: any) => {
             {mostrar.map((registro, index) => (
               <tr key={index}>
                 <td>{registro.turnoId}</td>
+                <td>{registro.username}</td>
                 <td>{registro.horaTurno}</td>
                 <td>{registro.andarivelSeleccionado}</td>
                 <td>{registro.usuarioId}</td>
                 <td>{registro.presentismo}</td>
-                <td><button onClick={() => handleClick(registro.turnoId, registro.presentismo)}>Cambiar Presentismo</button></td>
-                <td><button id={registro.turnoId} >Eliminar Turno</button></td>
+                <td><button onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
+                <td><button onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
               </tr>
             ))}
           </tbody>

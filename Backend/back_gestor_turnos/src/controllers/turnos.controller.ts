@@ -41,5 +41,10 @@ export class TurnosController {
         return await this.turnosService.cambiarPresentismo(turno);
     };
 
+    @Delete('/eliminarTurnoPorId')
+    async eliminarTurnoPorId(@Body() turnoId: TurnoDTO): Promise<any> {
+        return await this.turnosService.eliminarTurnoPorId(turnoId);
+    }
+
 
 }

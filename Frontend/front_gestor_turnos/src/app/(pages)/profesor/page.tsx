@@ -5,6 +5,7 @@ import withRoles from '@/app/componentes/HOC/WithRoles';
 import { TablaTurnos } from '@/app/componentes/tablaTurnos/TablaTurnos';
 import './pageProfesor.css'
 import moment from 'moment';
+import { Reportes } from '@/app/componentes/reportes/Reportes';
 
 const Profesor = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,6 +54,16 @@ const Profesor = () => {
             fechaTurno={fecha}
           />
         </div>
+
+        <div className='contenedor'>
+          <h2> Realizar una consulta</h2>
+
+          <div>
+            <button>Día con mas concurrencia</button><button>Nadador con mas faltas</button><button>Horario mas reservado de hoy</button>
+          </div>
+          < Reportes />
+        </div>
+
       </div>
 
       <button onClick={cerrarSesion}>Cerrar Sesion</button>

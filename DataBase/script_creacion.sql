@@ -23,7 +23,7 @@ fechaTurno date NOT NULL,
 horaTurno int NOT null, 
 andarivelSeleccionado int NOT null, 
 usuarioId int NOT null,
-presentismo boolean default true, 
+presentismo boolean default false, 
 primary key (turnoId),
 constraint FK_turnos_usuarios foreign key (usuarioId) references t_usuarios(usuarioId)
 );

@@ -24,3 +24,9 @@ insert into t_turnos (fechaTurno, horaTurno, andarivelSeleccionado, usuarioId) v
 
 /*****************************************************************************************************/
 
+//Lineas para Reportes
+select fechaTurno , count(fechaTurno) from t_turnos tt group by fechaTurno order by count(fechaTurno) desc limit 1 ;
+select horaTurno , count(horaTurno) from t_turnos tt where fechaTurno = "2024-07-02" group by horaTurno order by count(horaTurno) desc ;
+select usuarioId ,count(presentismo) from t_turnos tt where presentismo = 0 group by usuarioId order by count(presentismo) desc;
+select usuarioId ,count(presentismo) from t_turnos tt where presentismo = 1 group by usuarioId order by count(presentismo) desc;
+

@@ -74,7 +74,7 @@ export class TurnosService {
     ]);
     return cuenta2;
   }
-
+//-----------------
   async mostrarTurnosDelDia(fechaDelDia: any): Promise<any> {
     const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia,
       [fechaDelDia.fechaTurno]
@@ -87,6 +87,18 @@ export class TurnosService {
       turno.turnoId]);
 
     return result
+  }
+
+  async eliminarTurnoPorId(turno: TurnoDTO): Promise<any> {
+    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurnoPorId, [
+      turno.turnoId
+      ]);
+
+    if (result.affectedRows == 0) {
+      throw new HttpException("No se pudo eliminar", HttpStatus.NOT_FOUND);
+    } else {
+      return "Se borró el Turno"
+    }
   }
 
 
