@@ -18,9 +18,9 @@ const turnosQueries = {
 
   sumarPersonasDelDia: `select count(fechaTurno) from t_turnos ;`,
 
-  muestraTurnosDelDia: `select  tt.turnoId, tt.fechaTurno, tt.horaTurno, tt.andarivelSeleccionado, tt.usuarioId,  tt.presentismo, tu.username  from t_turnos tt join t_usuarios tu on tt.usuarioId = tu.usuarioId where fechaTurno = ?; `
+  muestraTurnosDelDia: `select  tt.turnoId, tt.fechaTurno, tt.horaTurno, tt.andarivelSeleccionado, tt.usuarioId,  tt.presentismo, tu.username  from t_turnos tt join t_usuarios tu on tt.usuarioId = tu.usuarioId where fechaTurno = ?; `,
 
-
+  
 
 }
 
