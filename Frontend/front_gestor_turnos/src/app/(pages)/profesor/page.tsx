@@ -43,7 +43,6 @@ const Profesor = () => {
       router.push('home')
     };
   };
-
   const concurrenciaClick = async () => {
     const concurrenciaaux = await diaConMasReservas();
     const fechaTurno = concurrenciaaux[0].fechaTurno;
@@ -63,6 +62,8 @@ const Profesor = () => {
     setTurnosHora(turnosHoraAux);
 
   }
+
+
 
   return (
     <>

@@ -13,9 +13,9 @@ export const diaConMasReservas = async (): Promise<any> => {
     };
 };
 
-export const turnosPorHoraDia = async (fechaTurno: any): Promise<any> => {
+export const turnosPorHoraDia = async (fechaTurno: iTurno): Promise<any> => {
     try {
-        const response: AxiosResponse<any, any> = await clienteAxios.post("/reportes/turnosPorHoraDia",[fechaTurno]);
+        const response: AxiosResponse<any, any> = await clienteAxios.post("/reportes/turnosPorHoraDia",{ fechaTurno: fechaTurno.fechaTurno });
         console.log("response : "+ response.data )
         return response.data;
     } catch (error) {
