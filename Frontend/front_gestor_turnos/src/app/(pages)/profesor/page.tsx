@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation';
 import withRoles from '@/app/componentes/HOC/WithRoles';
 import { TablaTurnos } from '@/app/componentes/tablaTurnos/TablaTurnos';
@@ -57,84 +57,88 @@ const Profesor = () => {
   const turnosHoraClick = async (fecha1: any) => {
     const turnoHoraAux = [];
     console.log("Esto el la fecha 1: " + fecha1);
-    const turnosHoraAux = await turnosPorHoraDia({fechaTurno: fecha1});
+    const turnosHoraAux = await turnosPorHoraDia({ fechaTurno: fecha1 });
     console.log(turnosHoraAux);
     setTurnosHora(turnosHoraAux);
 
   }
+  useEffect(() => {
+    concurrenciaClick();
+    turnosHoraClick(muestraFecha());
+  }, [fecha]);
 
 
 
-  return (
-    <>
-      <div className='div-pageProfe'>
-        <button onClick={restaDia}>Anterior</button>
-        <h1>Bienvenido {obtenerUsuario().username}</h1>
-        <button onClick={sumaDia}>Siguiente</button>
-        <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
+return (
+  <>
+    <div className='div-pageProfe'>
+      <button onClick={restaDia}>Anterior</button>
+      <h1>Bienvenido {obtenerUsuario().username}</h1>
+      <button onClick={sumaDia}>Siguiente</button>
+      <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
+
+      <div>
+        <TablaTurnos
+          fechaTurno={fecha}
+        />
+      </div>
+
+      <div className='contenedor'>
+        <h2> Realizar una consulta</h2>
 
         <div>
-          <TablaTurnos
-            fechaTurno={fecha}
-          />
-        </div>
+          <div className=''>
+            <button onClick={() => concurrenciaClick()}>Día con mas concurrencia</button>
+            <div className="contenedorTabla">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
 
-        <div className='contenedor'>
-          <h2> Realizar una consulta</h2>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <td>{concurrencia.fechaTurno}</td>
+                    <td>{concurrencia.cantidad}</td>
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <div>
-            <div className=''>
-              <button onClick={() => concurrenciaClick()}>Día con mas concurrencia</button>
-              <div className="contenedorTabla">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Cantidad</th>
+            <button onClick={() => turnosHoraClick(muestraFecha())}>Nadador con mas faltas</button>
+            <div className="contenedorTabla">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Turno ID</th>
+                    <th>Nombre</th>
+                    <th>Hora de Turno</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {turnosHora.map((registro, index) => (
+                    <tr key={index}>
+                      <td>{registro.hora}</td>
+                      <td>{registro.cantidad}</td>
+
 
                     </tr>
-                  </thead>
-
-                  <tbody>
-
-                    <tr>
-                      <td>{concurrencia.fechaTurno}</td>
-                      <td>{concurrencia.cantidad}</td>
-
-
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
-
-            <div>
-              <button onClick={() => turnosHoraClick(muestraFecha())}>Nadador con mas faltas</button>
-              <div className="contenedorTabla">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Turno ID</th>
-                      <th>Nombre</th>
-                      <th>Hora de Turno</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {turnosHora.map((registro, index) => (
-                      <tr key={index}>
-                        <td>{registro.hora}</td>
-                        <td>{registro.cantidad}</td>
-                        
-
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            {/*             <div>
+          </div>
+          {/*             <div>
               <button>Horario mas reservado de hoy</button>
               <div className="contenedorTabla">
                 <table>
@@ -169,15 +173,15 @@ const Profesor = () => {
               </div>
             </div> */}
 
-          </div>
-          < Reportes />
         </div>
-
+        < Reportes />
       </div>
 
-      <button onClick={cerrarSesion}>Cerrar Sesion</button>
-    </>
-  )
+    </div>
+
+    <button onClick={cerrarSesion}>Cerrar Sesion</button>
+  </>
+)
 }
 
 export default withRoles(Profesor, [2], "./home")
