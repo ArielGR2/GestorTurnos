@@ -1,10 +1,10 @@
 'use client';
 import './Register.css';
-import React, { useState } from 'react'
-// import { useRouter } from 'next/navigation';
+import React, { useRef, useState } from 'react'
 import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterProfesor = () => {
+  const formAux = useRef();
   const [nuevoUsuario, setNuevoUsuario] = useState({
     username: '',
     password: '',
@@ -24,13 +24,19 @@ export const RegisterProfesor = () => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoUsuario);
     alert("Nuevo Profesor Registrado");
-    // vaciarFormulario();
+    setNuevoUsuario({
+      username: '',
+      password: '',
+      activo: true,
+      rolId: 2,
+    });
+    formAux.current.reset();
   };
 
 
   return (
     <>
-      <form onSubmit={handleRegister} className='formLogin' id='formulario'>
+      <form  ref={formAux} onSubmit={handleRegister} className='formLogin' id='formulario'>
         <div className='divLogin'>
           <h2>Registrar Profesor</h2>
           <label>Ingrese nuevo Profesor:</label>

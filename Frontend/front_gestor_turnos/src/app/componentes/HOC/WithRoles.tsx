@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/navigation";
 
 export default function withRoles(Componente: any, permisosRequeridos: number[], goBackRoute: string) {
@@ -14,7 +13,6 @@ export default function withRoles(Componente: any, permisosRequeridos: number[],
         }
     }
 }
-
 function tienePermisosRequeridos(permisosRequeridos: number[]): boolean {
     try {
         const jwt = require('jsonwebtoken');

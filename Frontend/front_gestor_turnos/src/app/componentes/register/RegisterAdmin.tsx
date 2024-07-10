@@ -1,18 +1,16 @@
 'use client';
 import './Register.css';
-import React, { useState } from 'react'
-// import { useRouter } from 'next/navigation';
+import React, { useRef, useState } from 'react'
 import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterAdministrador = () => {
+  const formAux = useRef();
   const [nuevoAdmin, setNuevoAdmin] = useState({
     username: '',
     password: '',
     activo: true,
     rolId: 0,
   });
-
-  // const router = useRouter();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -26,12 +24,19 @@ export const RegisterAdministrador = () => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoAdmin);
     alert("Nuevo Admin Registrado");
+    setNuevoAdmin({
+      username: '',
+      password: '',
+      activo: true,
+      rolId: 0,
+    })
+    formAux.current.reset();
   };
 
 
   return (
     <>
-      <form onSubmit={handleRegister} className='formLogin'>
+      <form ref={formAux}  onSubmit={handleRegister} className='formLogin'>
         <div className='divLogin'>
           <h2>Registrar Administrador</h2>
           <label>Ingrese nuevo Profesor:</label>

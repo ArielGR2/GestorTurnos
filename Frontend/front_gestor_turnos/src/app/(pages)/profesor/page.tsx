@@ -7,12 +7,15 @@ import './pageProfesor.css'
 import moment from 'moment';
 import { Reportes } from '@/app/componentes/reportes/Reportes';
 import { diaConMasReservas, turnosPorHoraDia } from '@/app/services/ReportesService';
+import { Button } from 'react-bootstrap';
 
 const Profesor = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [fecha, setFecha] = useState(moment());
   const [concurrencia, setConcurrencia] = useState<{}>({});
+  const [verConcurrencia, setVerConcurrencia] = useState<boolean>(false);
   const [turnosHora, setTurnosHora] = useState<any[]>([]);
+  const [verTurnosHora, setVerTurnosHora] = useState<boolean>(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -20,7 +23,6 @@ const Profesor = () => {
   const sumaDia = () => {
     var auxFecha = fecha.clone().add(1, 'd')
     setFecha(auxFecha);
-
   }
   const restaDia = () => {
     var auxFecha = fecha.clone().subtract(1, 'd')
@@ -33,7 +35,6 @@ const Profesor = () => {
     const jwt = require('jsonwebtoken');
     const usuarioId: number | null = jwt.decode(sessionStorage.getItem('token')).usuarioId;
     const username: string | null = jwt.decode(sessionStorage.getItem('token')).username;
-
     return { usuarioId, username }
   }
   const cerrarSesion = () => {
@@ -45,100 +46,92 @@ const Profesor = () => {
   };
   const concurrenciaClick = async () => {
     const concurrenciaaux = await diaConMasReservas();
-    const fechaTurno = concurrenciaaux[0].fechaTurno;
+    const fechaTurno = moment(concurrenciaaux[0].fechaTurno).format("YYYY-MM-DD");
     const concurrenciaObj = {
       fechaTurno: fechaTurno,
       cantidad: concurrenciaaux[0].cantidad
     }
+    muestraFecha();
     setConcurrencia(concurrenciaObj)
     return concurrenciaaux
   }
-
   const turnosHoraClick = async (fecha1: any) => {
-    const turnoHoraAux = [];
-    console.log("Esto el la fecha 1: " + fecha1);
     const turnosHoraAux = await turnosPorHoraDia({ fechaTurno: fecha1 });
-    console.log(turnosHoraAux);
     setTurnosHora(turnosHoraAux);
-
   }
+  const handleButtonClick = async () => {
+    concurrenciaClick();
+    setVerConcurrencia(!verConcurrencia);
+  };
+  const handleButtonClick2 = async () => {
+    turnosHoraClick(muestraFecha());
+    setVerTurnosHora(!verTurnosHora);
+  };
   useEffect(() => {
     concurrenciaClick();
     turnosHoraClick(muestraFecha());
   }, [fecha]);
 
-
-
-return (
-  <>
-    <div className='div-pageProfe'>
-      <button onClick={restaDia}>Anterior</button>
-      <h1>Bienvenido {obtenerUsuario().username}</h1>
-      <button onClick={sumaDia}>Siguiente</button>
-      <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
-
-      <div>
-        <TablaTurnos
-          fechaTurno={fecha}
-        />
-      </div>
-
-      <div className='contenedor'>
-        <h2> Realizar una consulta</h2>
+  return (
+    <>
+      <div className='div-pageProfe'>
+        <button onClick={restaDia}>Anterior</button>
+        <h1>Bienvenido {obtenerUsuario().username}</h1>
+        <button onClick={sumaDia}>Siguiente</button>
+        <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
 
         <div>
-          <div className=''>
-            <button onClick={() => concurrenciaClick()}>Día con mas concurrencia</button>
-            <div className="contenedorTabla">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
+          <TablaTurnos
+            fechaTurno={fecha}
+          />
+        </div>
 
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  <tr>
-                    <td>{concurrencia.fechaTurno}</td>
-                    <td>{concurrencia.cantidad}</td>
-
-
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-
+        <div className='contenedor'>
+          <h2> Realizar una consulta</h2>
           <div>
-            <button onClick={() => turnosHoraClick(muestraFecha())}>Nadador con mas faltas</button>
-            <div className="contenedorTabla">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Turno ID</th>
-                    <th>Nombre</th>
-                    <th>Hora de Turno</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {turnosHora.map((registro, index) => (
-                    <tr key={index}>
-                      <td>{registro.hora}</td>
-                      <td>{registro.cantidad}</td>
-
-
+            <div className=''>
+              <Button variant="outline-primary" onClick={handleButtonClick}>{verConcurrencia ? 'Ocultar Concurrencia' : 'Ver Concurrencia'}</Button>
+              {verConcurrencia && (<div className="contenedorTabla">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Cantidad</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>{concurrencia.fechaTurno}</td>
+                      <td>{concurrencia.cantidad}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>)}
             </div>
-          </div>
-          {/*             <div>
+
+            <div>
+              <Button variant="outline-primary" onClick={handleButtonClick2}>{verTurnosHora ? 'Ocultar Turnos' : 'Ver Turnos'}</Button>
+              {verTurnosHora && (<div className="contenedorTabla">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Horario</th>
+                      <th>Cantidad de Reservas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {turnosHora.map((registro, index) => (
+                      <tr key={index}>
+                        <td>{registro.hora}</td>
+                        <td>{registro.cantidad}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>)}
+            </div>
+            {/*             <div>
               <button>Horario mas reservado de hoy</button>
               <div className="contenedorTabla">
                 <table>
@@ -173,15 +166,13 @@ return (
               </div>
             </div> */}
 
+          </div>
         </div>
-        < Reportes />
       </div>
 
-    </div>
-
-    <button onClick={cerrarSesion}>Cerrar Sesion</button>
-  </>
-)
+      <button onClick={cerrarSesion}>Cerrar Sesion</button>
+    </>
+  )
 }
 
 export default withRoles(Profesor, [2], "./home")
