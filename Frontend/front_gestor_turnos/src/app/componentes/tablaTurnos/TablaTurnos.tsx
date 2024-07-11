@@ -2,6 +2,7 @@
 import { iTurno } from '@/app/model/iTurno';
 import { cambiarPresentismo, eliminarTurnoPorId, mostrarTurnosDelDia } from '@/app/services/GestorTurnos';
 import React, { useEffect, useState } from 'react'
+import "./TablaTurnos.css"
 
 export const TablaTurnos = (props: any) => {
   const { fechaTurno } = props;
@@ -52,30 +53,27 @@ export const TablaTurnos = (props: any) => {
     <>
       <div className="contenedorTabla">
         <table>
-          <thead>
+          <thead className='titulosbord'>
             <tr>
-              <th>Turno ID</th>
               <th>Nombre</th>
-              <th>Hora de Turno</th>
+              <th>Horario</th>
               <th>Andarivel</th>
-              <th>Usuario ID</th>
               <th>Presentismo</th>
-              <th>Estado Presentismo</th>
-              <th>Actualizar</th>
+              <th></th>
             </tr>
           </thead>
 
           <tbody>
             {mostrar.map((registro, index) => (
               <tr key={index}>
-                <td>{registro.turnoId}</td>
-                <td>{registro.username}</td>
-                <td>{registro.horaTurno}</td>
-                <td>{registro.andarivelSeleccionado}</td>
-                <td>{registro.usuarioId}</td>
-                <td>{registro.presentismo}</td>
-                <td><button onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
-                <td><button onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
+
+                <td className='nombre'>{registro.username}</td>
+                <td className='borde'>{registro.horaTurno}</td>
+                <td className='borde'>{registro.andarivelSeleccionado}</td>
+
+                <td className='borde'>{registro.presentismo ? "Ausente " : "Presente"}<button onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
+
+                <td className='eliminar'><button onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
               </tr>
             ))}
           </tbody>

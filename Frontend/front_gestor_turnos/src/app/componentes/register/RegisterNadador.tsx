@@ -38,7 +38,7 @@ export const RegisterNadador = () => {
       <form ref={formAux} onSubmit={handleRegister} className='formLogin'>
         <div className='divLogin'>
           <h2>Registrar Nadador</h2>
-          <label>Ingrese su usuario:</label>
+          <label>Ingrese nuevo Nadador:</label>
           <input type="text" name="username" value={nuevoUsuario.username} onChange={handleChange} className="input" placeholder='Usuario...' />
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={nuevoUsuario.password} onChange={handleChange} className="input" placeholder='Contraseña...' />

@@ -38,8 +38,8 @@ export const RegisterAdministrador = () => {
     <>
       <form ref={formAux}  onSubmit={handleRegister} className='formLogin'>
         <div className='divLogin'>
-          <h2>Registrar Administrador</h2>
-          <label>Ingrese nuevo Profesor:</label>
+          <h2>Registrar Admin</h2>
+          <label>Ingrese nuevo Admin:</label>
           <input type="text" name="username" value={nuevoAdmin.username} onChange={handleChange} className="input" placeholder='Usuario...' />
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={nuevoAdmin.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
