@@ -46,7 +46,7 @@ export const Grilla = (props: any) => {
   };
 
   useEffect(() => {
-    console.log("Entro al useEffect!!!!");
+    //console.log("Entro al useEffect!!!!");
     const aux = async () => {
       setMostrar(await visualizarTurnos());
     };
@@ -73,7 +73,7 @@ export const Grilla = (props: any) => {
                 {objetoHora.andariveles.map(
                   (ocupados: number, index: number) => (
                     <td key={index}>
-                      <button onClick={() => handleClick(objetoHora.hora, index + 1)}> Reserva</button>
+                      <button className="reserva" onClick={() => handleClick(objetoHora.hora, index + 1)}> Reservar</button>
                       {ocupados}
                     </td>
                   )

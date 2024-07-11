@@ -53,7 +53,7 @@ const Nadador = () => {
         <button onClick={restaDia}>Anterior</button>
         <h1>Bienvenido {obtenerUsuario().username}</h1>
         <button onClick={sumaDia}>Siguiente</button>
-        <h2>Estos son los disponibles de:  {muestraFecha()}</h2>
+        <h2>Reservas del día:  {muestraFecha()}   (máximo 4 turnos)</h2>
 
         <div className='cuadroygrilla'>
           <CuadroTurno 
