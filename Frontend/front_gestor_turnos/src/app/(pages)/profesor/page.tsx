@@ -117,7 +117,7 @@ const Profesor = () => {
                   <thead>
                     <tr>
                       <th>Horario</th>
-                      <th>Cantidad de Reservas</th>
+                      <th>Cantidad</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -175,4 +175,4 @@ const Profesor = () => {
   )
 }
 
-export default withRoles(Profesor, [2], "./home")
+export default withRoles(Profesor, [2], "./home");
