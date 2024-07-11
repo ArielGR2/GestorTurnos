@@ -6,15 +6,11 @@ import { RegisterAdministrador } from '@/app/componentes/register/RegisterAdmin'
 import React, { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import './pageAdmin.css'
-
 import { TablaTurnos } from '@/app/componentes/tablaTurnos/TablaTurnos';
-//import './pageProfesor.css'
 import moment from 'moment';
 import { Reportes } from '@/app/componentes/reportes/Reportes';
 import { diaConMasReservas, turnosPorHoraDia } from '@/app/services/ReportesService';
 import { Button } from 'react-bootstrap';
-
-
 
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,7 +40,6 @@ const Admin = () => {
     const username: string | null = jwt.decode(sessionStorage.getItem('token')).username;
     return { usuarioId, username }
   }
-
   const cerrarSesion = () => {
     sessionStorage.removeItem('token');
     setIsLoggedIn(false);
@@ -52,7 +47,6 @@ const Admin = () => {
     if (pathname !== '/home') {
     };
   };
-
   const concurrenciaClick = async () => {
     const concurrenciaaux = await diaConMasReservas();
     const fechaTurno = moment(concurrenciaaux[0].fechaTurno).format("YYYY-MM-DD");
@@ -93,7 +87,7 @@ const Admin = () => {
           <div className='div-main'>
             <div className='subtitulo2'>
               <button onClick={restaDia}>Ver día Anterior</button>
-              <h2>Reservas del día:  {muestraFecha()}</h2>
+              <h2>Reservas del día: {muestraFecha()}</h2>
               <button onClick={sumaDia}>Ver día Siguiente</button>
             </div>
             <div>

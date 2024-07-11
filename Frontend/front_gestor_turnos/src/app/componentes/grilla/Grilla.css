@@ -1,9 +1,15 @@
-.contenedorGrilla{
-    margin: 15px;
-    border: 2px solid red;
-       
-   }
+.contenedorGrilla {
+    margin: 15px 0 15px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px;
 
-   .reserva{
-    margin: 0 8px 0 0 ;
-   }
+}
+.reserva {
+    margin: 0 8px 0 0;
+}
+
+.contenedorGrilla td {
+    border: 1px solid black;
+    text-align: center;
+}

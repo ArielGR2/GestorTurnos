@@ -26,13 +26,11 @@ const Nadador = () => {
     const jwt = require('jsonwebtoken');
     const usuarioId: number | null = jwt.decode(sessionStorage.getItem('token')).usuarioId;
     const username: string | null = jwt.decode(sessionStorage.getItem('token')).username;
-
-    return {usuarioId,username}
+    return { usuarioId, username }
   }
   const sumaDia = () => {
     var auxFecha = fecha.clone().add(1, 'd')
     setFecha(auxFecha);
-
   }
   const restaDia = () => {
     var auxFecha = fecha.clone().subtract(1, 'd')
@@ -41,36 +39,46 @@ const Nadador = () => {
   const muestraFecha = () => {
     return fecha.format('YYYY-MM-DD')
   }
-  const actualizarTurnoReservado = (turno:any) => {
+  const actualizarTurnoReservado = (turno: any) => {
     setTurnoReservado(turno);
   }
-
 
   return (
     <>
       <div className='div-pageNadador'>
+        <div className="titulo1">
+          <h1>Bienvenido {obtenerUsuario().username}</h1>
+          <button onClick={cerrarSesion}>Cerrar Sesion</button>
+        </div>
 
-        <button onClick={restaDia}>Anterior</button>
-        <h1>Bienvenido {obtenerUsuario().username}</h1>
-        <button onClick={sumaDia}>Siguiente</button>
-        <h2>Reservas del día:  {muestraFecha()}   (máximo 4 turnos)</h2>
+        <div className="main">
+          <div className="div-main">
+            <div className="subtitulo2">
+              <button onClick={restaDia}>Ver día Anterior</button>
+              <div className="subtitulo3">
+                <h2>Reservas del día: {muestraFecha()}</h2>
+                <h3>Ocupacion maxima por andarivel: 4</h3>
+              </div>
+              <button onClick={sumaDia}>Ver día Siguiente</button>
+            </div>
+          </div>
 
-        <div className='cuadroygrilla'>
-          <CuadroTurno 
-            fechaTurno={fecha}
-            usuarioId={obtenerUsuario().usuarioId}
-            turnoReservado={turnoReservado} 
-            actualizarTurnoReservado={actualizarTurnoReservado} 
-          />
-          <Grilla 
-            fechaTurno={fecha}
-            usuarioId={obtenerUsuario().usuarioId}
-            actualizarTurnoReservado={actualizarTurnoReservado} 
-          />
+
+          <div className='cuadroygrilla'>
+            <CuadroTurno
+              fechaTurno={fecha}
+              usuarioId={obtenerUsuario().usuarioId}
+              turnoReservado={turnoReservado}
+              actualizarTurnoReservado={actualizarTurnoReservado}
+            />
+            <Grilla
+              fechaTurno={fecha}
+              usuarioId={obtenerUsuario().usuarioId}
+              actualizarTurnoReservado={actualizarTurnoReservado}
+            />
+          </div>
         </div>
       </div>
-
-      <button onClick={cerrarSesion}>Cerrar Sesion</button>
     </>
 
   )

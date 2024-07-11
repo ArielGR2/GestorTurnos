@@ -65,7 +65,7 @@ export const TablaTurnos = (props: any) => {
 
           <tbody>
             {mostrar.map((registro, index) => (
-              <tr key={index}>
+              <tr className='tr-registro' key={index}>
 
                 <td className='nombre'>{registro.username}</td>
                 <td className='borde'>{registro.horaTurno}</td>

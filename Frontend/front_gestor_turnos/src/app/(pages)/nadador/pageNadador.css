@@ -1,16 +1,54 @@
 .div-pageNadador {
-  background-color:rgb(136, 136, 178);
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  
+  height: fit-content;
+
+}
+
+.titulo1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+.div-main {
+  width: 70%;
+}
+
+.subtitulo2 {
+  margin: 5px 0 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.subtitulo3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtitulo2 h2,
+h3 {
+  margin: 0 10px 0 10px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 h1 {
-display: inline-block;
-
+  margin: 0;
 }
-.cuadroygrilla{
-display: flex;
-flex-direction: row;
-  
 
+.cuadroygrilla {
+  display: flex;
+  flex-direction: row;
 }

@@ -4,6 +4,10 @@ table{
     border-radius: 5px;
     width: 100%;
 }
+/* SACAR ESTO LUEGO */
+.tr-registro {
+    background-color: red;
+}
 
 .borde {
     padding: 2px;
@@ -16,4 +20,8 @@ table{
     border: 2px solid black;
 
 
+}
+
+.eliminar {
+    text-align: center;
 }
