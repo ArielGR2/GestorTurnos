@@ -45,6 +45,10 @@ export const Grilla = (props: any) => {
     visualizarTurnos();
   };
 
+  const formatHora = (hora) => {
+    return hora.toString().padStart(2, '0') + ":00";
+  };
+
   useEffect(() => {
     //console.log("Entro al useEffect!!!!");
     const aux = async () => {
@@ -69,7 +73,7 @@ export const Grilla = (props: any) => {
           <tbody>
             {mostrar.map((objetoHora, index2) => (
               <tr key={index2}>
-                <td>{objetoHora.hora}</td>
+                <td>{formatHora(objetoHora.hora)}</td>
                 {objetoHora.andariveles.map(
                   (ocupados: number, index: number) => (
                     <td key={index}>

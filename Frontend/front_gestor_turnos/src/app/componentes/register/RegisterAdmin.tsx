@@ -44,7 +44,7 @@ export const RegisterAdministrador = () => {
           <label>Ingrese su contraseña:</label>
           <input type="password" name="password" value={nuevoAdmin.password} onChange={handleChange} className="input" placeholder='Contraseña...' />
           <br />
-          <button type="submit" className="submit-button">Registrar</button>
+          <button type="submit" className="button">Registrar</button>
         </div>
       </form>
     </>

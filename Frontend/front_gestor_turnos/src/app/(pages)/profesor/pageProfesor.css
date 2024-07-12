@@ -1,15 +1,89 @@
 .div-pageProfesor {
-  background-color: blueviolet;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.titulo1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.titulo1 h1 {
+  margin: 0;
+}
+
+.titulo1 button {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.div-main {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.subtitulo2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  min-width: 150px;
+}
+
+.contenedor {
+  margin-top: 20px;
+}
+
+.contenedor h2 {
+  margin-bottom: 10px;
+}
+
+.contenedorTabla {
+  margin-top: 20px;
+}
+
+.contenedorTabla table {
   width: 100%;
-  height: 100px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-h1 {
-  display: inline-block;
-
+.contenedorTabla th, .contenedorTabla td {
+  padding: 10px;
+  border: 1px solid #dddddd;
+  text-align: left;
 }
 
-.contenedor{
-  margin: 15px 0 25px 0;
-  border: 2px solid red;
+.contenedorTabla th {
+  background-color: #007bff;
+  color: white;
 }

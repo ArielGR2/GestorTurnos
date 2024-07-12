@@ -71,9 +71,9 @@ export const TablaTurnos = (props: any) => {
                 <td className='borde'>{registro.horaTurno}</td>
                 <td className='borde'>{registro.andarivelSeleccionado}</td>
 
-                <td className='borde'>{registro.presentismo ? "Ausente " : "Presente"}<button onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
+                <td className='borde'>{registro.presentismo ? "Ausente " : "Presente"}<button className="button" onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
 
-                <td className='eliminar'><button onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
+                <td className='eliminar'><button className="button" onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
               </tr>
             ))}
           </tbody>

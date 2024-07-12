@@ -80,15 +80,15 @@ const Admin = () => {
       <div className='div-pageAdmin'>
         <div className='titulo1'>
           <h1>Bienvenido {obtenerUsuario().username}</h1>
-          <button onClick={cerrarSesion}>Cerrar Sesion</button>
+          <button className='button' onClick={cerrarSesion}>Cerrar Sesion</button>
         </div>
 
         <div className='main'>
           <div className='div-main'>
             <div className='subtitulo2'>
-              <button onClick={restaDia}>Ver día Anterior</button>
+              <button className='button' onClick={restaDia}>Ver día Anterior</button>
               <h2>Reservas del día: {muestraFecha()}</h2>
-              <button onClick={sumaDia}>Ver día Siguiente</button>
+              <button className='button' onClick={sumaDia}>Ver día Siguiente</button>
             </div>
             <div>
               <TablaTurnos
@@ -98,9 +98,9 @@ const Admin = () => {
 
             <div className='contenedor'>
               <h2> Realizar una consulta</h2>
-              <div>
-                <div className=''>
-                  <Button variant="outline-primary" onClick={handleButtonClick}>{verConcurrencia ? 'Ocultar Concurrencia' : 'Ver Concurrencia'}</Button>
+              <div className='div-botones'>
+                <div>
+                  <button className='button' onClick={handleButtonClick}>{verConcurrencia ? 'Ocultar Concurrencia' : 'Ver Concurrencia'}</button>
                   {verConcurrencia && (<div className="contenedorTabla">
                     <table>
                       <thead>
@@ -121,7 +121,7 @@ const Admin = () => {
                 </div>
 
                 <div>
-                  <Button variant="outline-primary" onClick={handleButtonClick2}>{verTurnosHora ? 'Ocultar Turnos' : 'Ver Turnos'}</Button>
+                  <button className='button' onClick={handleButtonClick2}>{verTurnosHora ? 'Ocultar Turnos' : 'Ver Turnos'}</button>
                   {verTurnosHora && (<div className="contenedorTabla">
                     <table>
                       <thead>
@@ -141,58 +141,18 @@ const Admin = () => {
                     </table>
                   </div>)}
                 </div>
-                {/*             <div>
-              <button>Horario mas reservado de hoy</button>
-              <div className="contenedorTabla">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Turno ID</th>
-                      <th>Nombre</th>
-                      <th>Hora de Turno</th>
-                      <th>Andarivel</th>
-                      <th>Usuario ID</th>
-                      <th>Presentismo</th>
-                      <th>Estado Presentismo</th>
-                      <th>Actualizar</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {mostrar.map((registro, index) => (
-                      <tr key={index}>
-                        <td>{registro.turnoId}</td>
-                        <td>{registro.username}</td>
-                        <td>{registro.horaTurno}</td>
-                        <td>{registro.andarivelSeleccionado}</td>
-                        <td>{registro.usuarioId}</td>
-                        <td>{registro.presentismo}</td>
-                        <td><button onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
-                        <td><button onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div> */}
-
               </div>
             </div>
           </div>
 
           <div className='div-register'>
             <RegisterNadador />
-            <RegisterProfesor />
-            <RegisterAdministrador />
+            <RegisterProfesor  />
+            <RegisterAdministrador  />
           </div>
         </div>
-
-
-
-
       </div>
     </>
   )
 }
 export default withRoles(Admin, [0], "./home")
-

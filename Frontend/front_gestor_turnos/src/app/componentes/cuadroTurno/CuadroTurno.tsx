@@ -55,15 +55,15 @@ export const CuadroTurno = (props: any) => {
             setMostrar1(turnoAux)
         };
         aux();
-    }, [fechaTurno, turnoReservado, visualizarTurnos ]);
+    }, [fechaTurno, turnoReservado ]);
 
     return (
         <div className='contenedorCuadro'>
             <p><b>Turno reservado</b></p>
-            <p><b>  Fecha: {mostar1.fechaTurno}</b></p>
-            <p> <b> Hora: {mostar1.horaTurno}  </b></p>
-            <p><b> Andarivel: {mostar1.andarivelSeleccionado}</b></p>
-            <button onClick={eliminarTurnoMostrado}>Eliminar</button>
+            <p><b>Fecha: {mostar1.fechaTurno}</b></p>
+            <p> <b>Hora: {mostar1.horaTurno}  </b></p>
+            <p><b>Andarivel: {mostar1.andarivelSeleccionado}</b></p>
+            <button className="button" onClick={eliminarTurnoMostrado}>Eliminar</button>
         </div>
     )
 }
