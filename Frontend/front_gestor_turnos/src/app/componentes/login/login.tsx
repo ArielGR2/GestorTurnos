@@ -44,7 +44,6 @@ export const Login = () => {
 
   return (
     <>
-    {/* Reformar el componente para que tenga los botones de Login y Register */}
       <form onSubmit={handleSubmit} className='formLogin'>
         <div className='divLogin'>
           <h2>Login</h2>

@@ -1,10 +1,10 @@
 'use client';
 import './Register.css';
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterProfesor = () => {
-  const formAux = useRef();
+  const formAux = useRef<HTMLFormElement>(null);
   const [nuevoUsuario, setNuevoUsuario] = useState({
     username: '',
     password: '',
@@ -12,7 +12,7 @@ export const RegisterProfesor = () => {
     rolId: 2,
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNuevoUsuario(prevState => ({
       ...prevState,
@@ -20,7 +20,7 @@ export const RegisterProfesor = () => {
     }));
   };
 
-  const handleRegister = async (e: any) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoUsuario);
     alert("Nuevo Profesor Registrado");
@@ -30,13 +30,12 @@ export const RegisterProfesor = () => {
       activo: true,
       rolId: 2,
     });
-    formAux.current.reset();
+    formAux.current?.reset();
   };
-
 
   return (
     <>
-      <form  ref={formAux} onSubmit={handleRegister} className='formLogin' id='formulario'>
+      <form ref={formAux} onSubmit={handleRegister} className='formLogin' id='formulario'>
         <div className='divLogin'>
           <h2>Registrar Profesor</h2>
           <label>Ingrese nuevo Profesor:</label>
@@ -48,6 +47,5 @@ export const RegisterProfesor = () => {
         </div>
       </form>
     </>
-  )
-
-}
+  );
+};

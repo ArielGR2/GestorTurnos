@@ -8,7 +8,6 @@ export const TablaTurnos = (props: any) => {
   const { fechaTurno } = props;
 
   const [mostrar, setMostrar] = useState<any[]>([]);
-  // const [auxTurnosFechaOK, setAuxTurnosFechaOK] = useState<any[]>([]);
 
   const visualizarTurnos = async () => {
     const auxTurnos = [];
@@ -36,11 +35,6 @@ export const TablaTurnos = (props: any) => {
     await eliminarTurnoPorId(turno);
     setMostrar(await visualizarTurnos());
   };
-
-
-
-
-
 
   useEffect(() => {
     const aux = async () => {

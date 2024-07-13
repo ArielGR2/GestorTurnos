@@ -38,19 +38,16 @@ export const Grilla = (props: any) => {
       usuarioId: usuarioId,
     };
     const response = await reservarTurno(turno);
-    console.log("hola response ", response);
-    console.log("hola turno ", turno);
     setTurno(response);
     actualizarTurnoReservado(turno);
     visualizarTurnos();
   };
 
-  const formatHora = (hora) => {
+  const formatHora = (hora: number) => {
     return hora.toString().padStart(2, '0') + ":00";
   };
 
   useEffect(() => {
-    //console.log("Entro al useEffect!!!!");
     const aux = async () => {
       setMostrar(await visualizarTurnos());
     };

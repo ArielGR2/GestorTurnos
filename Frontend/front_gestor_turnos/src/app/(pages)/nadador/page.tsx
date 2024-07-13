@@ -63,7 +63,6 @@ const Nadador = () => {
             </div>
           </div>
 
-
           <div className='cuadroygrilla'>
             <CuadroTurno
               fechaTurno={fecha}

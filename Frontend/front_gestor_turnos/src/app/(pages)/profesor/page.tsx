@@ -10,10 +10,20 @@ import { diaConMasReservas, turnosPorHoraDia } from '@/app/services/ReportesServ
 const Profesor = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [fecha, setFecha] = useState(moment());
-  const [concurrencia, setConcurrencia] = useState({});
+  const [concurrencia, setConcurrencia] = useState<Concurrencia>({ fechaTurno: '', cantidad: 0 });
   const [verConcurrencia, setVerConcurrencia] = useState(false);
-  const [turnosHora, setTurnosHora] = useState([]);
+  const [turnosHora, setTurnosHora] = useState<TurnoHora[]>([]);
   const [verTurnosHora, setVerTurnosHora] = useState(false);
+
+  interface Concurrencia {
+    fechaTurno: string;
+    cantidad: number;
+  }
+  
+  interface TurnoHora {
+    hora: string;
+    cantidad: number;
+  }
 
   const router = useRouter();
   const pathname = usePathname();
@@ -59,7 +69,7 @@ const Profesor = () => {
     return concurrenciaaux;
   };
 
-  const turnosHoraClick = async (fecha1) => {
+  const turnosHoraClick = async (fecha1: any) => {
     const turnosHoraAux = await turnosPorHoraDia({ fechaTurno: fecha1 });
     setTurnosHora(turnosHoraAux);
   };
@@ -94,6 +104,7 @@ const Profesor = () => {
               <h2>Reservas del día: {muestraFecha()}</h2>
               <button className='button' onClick={sumaDia}>Ver día Siguiente</button>
             </div>
+            
             <div>
               <TablaTurnos fechaTurno={fecha} />
             </div>

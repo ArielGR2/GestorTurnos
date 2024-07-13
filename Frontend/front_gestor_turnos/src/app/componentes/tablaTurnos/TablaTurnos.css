@@ -1,19 +1,19 @@
 table{
     padding: 8px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 5px;
     width: 100%;
 }
 
 .borde {
     padding: 2px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     text-align: center;
 
 }
 .nombre{
     padding: 2px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
 
 
 }

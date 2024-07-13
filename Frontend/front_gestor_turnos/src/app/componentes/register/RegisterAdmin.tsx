@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react'
 import { registrarUsuario } from '@/app/services/RegisterService';
 
 export const RegisterAdministrador = () => {
-  const formAux = useRef();
+  const formAux = useRef<HTMLFormElement>(null);
   const [nuevoAdmin, setNuevoAdmin] = useState({
     username: '',
     password: '',
@@ -12,7 +12,7 @@ export const RegisterAdministrador = () => {
     rolId: 0,
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNuevoAdmin(prevState => ({
       ...prevState,
@@ -20,7 +20,7 @@ export const RegisterAdministrador = () => {
     }));
   };
 
-  const handleRegister = async (e: any) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const usuarioRegistrado = await registrarUsuario(nuevoAdmin);
     alert("Nuevo Admin Registrado");
@@ -30,7 +30,7 @@ export const RegisterAdministrador = () => {
       activo: true,
       rolId: 0,
     })
-    formAux.current.reset();
+    formAux.current?.reset();
   };
 
 

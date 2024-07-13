@@ -8,17 +8,25 @@ import { useRouter, usePathname } from 'next/navigation'
 import './pageAdmin.css'
 import { TablaTurnos } from '@/app/componentes/tablaTurnos/TablaTurnos';
 import moment from 'moment';
-import { Reportes } from '@/app/componentes/reportes/Reportes';
 import { diaConMasReservas, turnosPorHoraDia } from '@/app/services/ReportesService';
-import { Button } from 'react-bootstrap';
 
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [fecha, setFecha] = useState(moment());
-  const [concurrencia, setConcurrencia] = useState<{}>({});
+  const [concurrencia, setConcurrencia] = useState<Concurrencia>({ fechaTurno: '', cantidad: 0 });
   const [verConcurrencia, setVerConcurrencia] = useState<boolean>(false);
-  const [turnosHora, setTurnosHora] = useState<any[]>([]);
+  const [turnosHora, setTurnosHora] = useState<TurnoHora[]>([]);
   const [verTurnosHora, setVerTurnosHora] = useState<boolean>(false);
+
+  interface Concurrencia {
+    fechaTurno: string;
+    cantidad: number;
+  }
+  
+  interface TurnoHora {
+    hora: string;
+    cantidad: number;
+  }
 
   const router = useRouter();
   const pathname = usePathname();
