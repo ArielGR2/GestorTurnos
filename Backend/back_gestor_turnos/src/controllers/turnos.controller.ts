@@ -6,7 +6,6 @@ import { TurnosService } from "src/services/turnos.service";
 export class TurnosController {
     constructor(private turnosService: TurnosService) { }
 
-
     @Post('/ocupados')
     async mostrarLibres(@Body() fechaActual: TurnoDTO): Promise<number> {
         const turnosDisponibles = await this.turnosService.mostrarLibres(fechaActual);
@@ -24,9 +23,9 @@ export class TurnosController {
             throw new HttpException('Datos incompletos', HttpStatus.BAD_REQUEST);
         }
         return await this.turnosService.eliminarTurno(turno);
-    }
+    };
 
-    @Post('/muestraTurnoReservado') //Para mostrar el turno que tenga reservado por dia por usuariId
+    @Post('/muestraTurnoReservado') 
     async muestraTurnoreservadoPorId(@Body() datosTurno: any): Promise<any> {
         return await this.turnosService.muestraTurnoReservadoPorId(datosTurno);
     };
@@ -45,7 +44,4 @@ export class TurnosController {
     async eliminarTurnoPorId(@Body() turnoId: TurnoDTO): Promise<any> {
         return await this.turnosService.eliminarTurnoPorId(turnoId);
     }
-
-    
-
 }

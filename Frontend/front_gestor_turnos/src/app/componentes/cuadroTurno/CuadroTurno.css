@@ -3,10 +3,12 @@
     border: 2px solid #007bff;
     border-radius: 8px;
     width: 160px;
-    padding: 3px 10px;
+    height: 180px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    
 }
 
 p {

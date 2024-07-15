@@ -22,7 +22,4 @@ export class ReportesController {
         return await this.reportesService.turnosPorHoraDia(fecha);
     };
 
-
-
-
 }

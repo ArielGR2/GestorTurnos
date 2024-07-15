@@ -35,7 +35,9 @@ export const TablaTurnos = (props: any) => {
     await eliminarTurnoPorId(turno);
     setMostrar(await visualizarTurnos());
   };
-
+  const formatHora = (hora: number) => {
+    return hora.toString().padStart(2, '0') + ":00";
+  };
   useEffect(() => {
     const aux = async () => {
       setMostrar(await visualizarTurnos());
@@ -62,10 +64,10 @@ export const TablaTurnos = (props: any) => {
               <tr className='tr-registro' key={index}>
 
                 <td className='nombre'>{registro.username}</td>
-                <td className='borde'>{registro.horaTurno}</td>
+                <td className='borde'>{formatHora(registro.horaTurno)}</td>
                 <td className='borde'>{registro.andarivelSeleccionado}</td>
 
-                <td className='borde'>{registro.presentismo ? "Ausente " : "Presente"}<button className="button" onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
+                <td className='borde'>{registro.presentismo ? "Ausente" : "Presente"}<button className="button" onClick={() => handleClick_Cambia(registro.turnoId, registro.presentismo)}>Cambiar</button></td>
 
                 <td className='eliminar'><button className="button" onClick={() => handleClick_Borra(registro.turnoId)} >Eliminar Turno</button></td>
               </tr>

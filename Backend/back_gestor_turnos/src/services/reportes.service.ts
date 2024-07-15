@@ -1,9 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "./db.service";
-import turnosQueries from "./queries/turnos.queries";
 import reportesQueries from "./queries/reportes.queries";
 import { RowDataPacket } from "mysql2";
-
 
 @Injectable()
 export class ReportesService {
@@ -11,12 +9,10 @@ export class ReportesService {
 
     async diaConMasReservas(): Promise<any> {
         const response = await this.databaseService.executeSelect(reportesQueries.diaConMasReservas, []);
-        //console.log("Response es:  "+ response );
-        const result = response.map((rs: RowDataPacket) => {
+          const result = response.map((rs: RowDataPacket) => {
             return {
                 fechaTurno: rs['fechaTurno'],
                 cantidad: rs['count(fechaTurno)'],
-
             };
         });
         return result
@@ -29,7 +25,6 @@ export class ReportesService {
                 nombre: rs['username'],
                 usuarioId: rs['usuarioId'],
                 cantidad: rs['count(presentismo)'],
-                
             };
         });
         return result
@@ -42,16 +37,9 @@ export class ReportesService {
             return {
                 hora: rs['horaTurno'],
                 cantidad: rs['count(horaTurno)'],
-                
-                
             };
         });
         return result
     }
-
-
-
-
-
 
 }

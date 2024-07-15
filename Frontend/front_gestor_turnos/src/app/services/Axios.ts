@@ -18,7 +18,7 @@ clienteAxios.interceptors.response.use(
         return Promise.reject(error.response.data.errors[0].msg);
       }
       if (error.response.data.message) {
-        return Promise.reject(error.response.data.message); // Cambiado para devolver el mensaje específico del backend
+        return Promise.reject(error.response.data.message); 
       }
       return Promise.reject(error.response.data.msg);
     }
@@ -31,9 +31,9 @@ clienteAxios.interceptors.response.use(
     if (status === 500) {
       return Promise.reject('axios.errors.server');
     }
-    return Promise.reject(error.response); // Asegúrate de rechazar la respuesta para otros códigos de estado
+    return Promise.reject(error.response); 
   }
 );
 
-export default clienteAxios; /*clienteAxios2;*/
+export default clienteAxios;
 

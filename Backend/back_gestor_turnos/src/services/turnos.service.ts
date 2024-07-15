@@ -10,7 +10,6 @@ export class TurnosService {
 
   async mostrarLibres(fechaActual: TurnoDTO): Promise<number> {
     const cuenta = await this.databaseService.executeSelect(turnosQueries.contarTurnosOcupados, [fechaActual.fechaTurno, fechaActual.horaTurno, fechaActual.andarivelSeleccionado]);
-    // console.log(fechaActual)
     const valor = JSON.parse(JSON.stringify(cuenta))
     return valor[0].ocupados;
   };
@@ -74,7 +73,7 @@ export class TurnosService {
     ]);
     return cuenta2;
   }
-//-----------------
+
   async mostrarTurnosDelDia(fechaDelDia: any): Promise<any> {
     const turnosDelDia = await this.databaseService.executeSelect(turnosQueries.muestraTurnosDelDia,
       [fechaDelDia.fechaTurno]
@@ -83,8 +82,8 @@ export class TurnosService {
   }
 
   async cambiarPresentismo(turno: TurnoDTO): Promise<any> {
-    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [turno.presentismo, 
-      turno.turnoId]);
+    const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.cambiarPresentismo, [turno.presentismo,
+    turno.turnoId]);
 
     return result
   }
@@ -92,15 +91,13 @@ export class TurnosService {
   async eliminarTurnoPorId(turno: TurnoDTO): Promise<any> {
     const result: ResultSetHeader = await this.databaseService.executeQuery(turnosQueries.eliminarTurnoPorId, [
       turno.turnoId
-      ]);
-
+    ]);
     if (result.affectedRows == 0) {
       throw new HttpException("No se pudo eliminar", HttpStatus.NOT_FOUND);
     } else {
       return "Se borró el Turno"
     }
   }
-
 
 };
 

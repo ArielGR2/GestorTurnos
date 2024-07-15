@@ -8,12 +8,12 @@
 .titulo1 {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
   align-items: center;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
-  margin-bottom: 20px;
 }
 
 .titulo1 h1 {
@@ -51,12 +51,14 @@
 .button {
   background-color: #007bff;
   border: none;
+  max-height: 200px;
   padding: 10px 20px;
   color: white;
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 8px;
   min-width: 150px;
+  
 }
 
 .contenedor {
@@ -81,7 +83,7 @@
 .contenedorTabla td {
   padding: 10px;
   border: 1px solid #dddddd;
-  text-align: left;
+  
 }
 
 .contenedorTabla th {

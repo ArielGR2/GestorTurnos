@@ -8,7 +8,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import './pageAdmin.css'
 import { TablaTurnos } from '@/app/componentes/tablaTurnos/TablaTurnos';
 import moment from 'moment';
-import { diaConMasReservas, turnosPorHoraDia } from '@/app/services/ReportesService';
+import { diaConMasReservas, nadadorConMasAusencias, turnosPorHoraDia } from '@/app/services/ReportesService';
 
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,14 +17,22 @@ const Admin = () => {
   const [verConcurrencia, setVerConcurrencia] = useState<boolean>(false);
   const [turnosHora, setTurnosHora] = useState<TurnoHora[]>([]);
   const [verTurnosHora, setVerTurnosHora] = useState<boolean>(false);
+  const [ausencias, setAusencias] = useState<Presentismo[]>([]);
+  const [verAusencias, setVerAusencias] = useState<boolean>(false);
 
   interface Concurrencia {
     fechaTurno: string;
     cantidad: number;
   }
-  
+
   interface TurnoHora {
     hora: string;
+    cantidad: number;
+  }
+
+  interface Presentismo {
+    nombre: string;
+    usuarioID: number;
     cantidad: number;
   }
 
@@ -70,6 +78,10 @@ const Admin = () => {
     const turnosHoraAux = await turnosPorHoraDia({ fechaTurno: fecha1 });
     setTurnosHora(turnosHoraAux);
   }
+  const turnosAusenciaClick = async (fecha2: any) => {
+    const ausenciaAux = await nadadorConMasAusencias({ fechaTurno: fecha2 });
+    setAusencias(ausenciaAux);
+  }
   const handleButtonClick = async () => {
     concurrenciaClick();
     setVerConcurrencia(!verConcurrencia);
@@ -77,6 +89,15 @@ const Admin = () => {
   const handleButtonClick2 = async () => {
     turnosHoraClick(muestraFecha());
     setVerTurnosHora(!verTurnosHora);
+  };
+
+  const handleButtonClick3 = async () => {
+    turnosAusenciaClick(moment().format('YYYY-MM-DD'));
+    setVerAusencias(!verAusencias);
+  };
+
+  const formatHora = (hora: number) => {
+    return hora.toString().padStart(2, '0') + ":00";
   };
   useEffect(() => {
     concurrenciaClick();
@@ -108,7 +129,7 @@ const Admin = () => {
               <h2> Realizar una consulta</h2>
               <div className='div-botones'>
                 <div>
-                  <button className='button' onClick={handleButtonClick}>{verConcurrencia ? 'Ocultar Concurrencia' : 'Ver Concurrencia'}</button>
+                  <button className='button' onClick={handleButtonClick}>{verConcurrencia ? 'Ocultar Concurrencia' : 'Ver día con mayor Concurrencia'}</button>
                   {verConcurrencia && (<div className="contenedorTabla">
                     <table>
                       <thead>
@@ -129,7 +150,7 @@ const Admin = () => {
                 </div>
 
                 <div>
-                  <button className='button' onClick={handleButtonClick2}>{verTurnosHora ? 'Ocultar Turnos' : 'Ver Turnos'}</button>
+                  <button className='button' onClick={handleButtonClick2}>{verTurnosHora ? 'Ocultar Turnos' : 'Ver cantidad de Turnos por Hs del día actual'}</button>
                   {verTurnosHora && (<div className="contenedorTabla">
                     <table>
                       <thead>
@@ -141,7 +162,7 @@ const Admin = () => {
                       <tbody>
                         {turnosHora.map((registro, index) => (
                           <tr key={index}>
-                            <td>{registro.hora}</td>
+                            <td>{formatHora(parseInt(registro.hora))}</td>
                             <td>{registro.cantidad}</td>
                           </tr>
                         ))}
@@ -149,14 +170,37 @@ const Admin = () => {
                     </table>
                   </div>)}
                 </div>
+
+                <div>
+                  <button className='button' onClick={handleButtonClick3}>{verAusencias ? 'Ocultar Usuarios' : 'Ver Usuarios con mas Faltas'}</button>
+                  {verAusencias && (<div className="contenedorTabla">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Usuario</th>
+                          <th>Cantidad de Faltas</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {ausencias.map((registro, index) => (
+                          <tr key={index}>
+                            <td>{registro.nombre}</td>
+                            <td>{registro.cantidad}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>)}
+                </div>
+
               </div>
             </div>
           </div>
 
           <div className='div-register'>
             <RegisterNadador />
-            <RegisterProfesor  />
-            <RegisterAdministrador  />
+            <RegisterProfesor />
+            <RegisterAdministrador />
           </div>
         </div>
       </div>

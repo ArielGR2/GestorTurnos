@@ -5,7 +5,6 @@ export default function withRoles(Componente: any, permisosRequeridos: number[],
         const router = useRouter();
         const tienePermiso = tienePermisosRequeridos(permisosRequeridos);
         if (tienePermiso) {
-            console.log("Tiene permiso: ", tienePermiso);
             return <Componente {...props} />
         } else {
             router.push(goBackRoute);

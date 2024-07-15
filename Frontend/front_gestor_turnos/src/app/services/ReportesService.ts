@@ -15,8 +15,16 @@ export const diaConMasReservas = async (): Promise<any> => {
 
 export const turnosPorHoraDia = async (fechaTurno: iTurno): Promise<any> => {
     try {
-        const response: AxiosResponse<any, any> = await clienteAxios.post("/reportes/turnosPorHoraDia",{ fechaTurno: fechaTurno.fechaTurno });
-        console.log("response : "+ response.data )
+        const response: AxiosResponse<any, any> = await clienteAxios.post("/reportes/turnosPorHoraDia", { fechaTurno: fechaTurno.fechaTurno });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error');
+    };
+};
+
+export const nadadorConMasAusencias = async (fechaTurno: iTurno): Promise<any> => {
+    try {
+        const response: AxiosResponse<any, any> = await clienteAxios.post("/reportes/nadadorConMasAusencias", { fechaTurno: fechaTurno.fechaTurno });
         return response.data;
     } catch (error) {
         throw new Error('Error');

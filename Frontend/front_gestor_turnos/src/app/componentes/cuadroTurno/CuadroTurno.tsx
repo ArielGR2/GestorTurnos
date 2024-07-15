@@ -32,30 +32,28 @@ export const CuadroTurno = (props: any) => {
             usuarioId: usuarioId
         };
         const turnoAEliminar = await muestraTurnoReservado(turno);
-        const auxTurno : iTurno= {
+        const auxTurno: iTurno = {
             fechaTurno: fechaTurno.format("YYYY-MM-DD"),
             horaTurno: turnoAEliminar[0].horaTurno,
             andarivelSeleccionado: turnoAEliminar[0].andarivelSeleccionado,
             usuarioId: usuarioId
         }
-        console.log("turno armado ", auxTurno);
-        const hola = await eliminarTurno(auxTurno);
-        if (hola) {
-            setMostrar1({}); 
+        const resultado = await eliminarTurno(auxTurno);
+        if (resultado) {
+            setMostrar1({});
             actualizarTurnoReservado(null);
             visualizarTurnos();
         }
-        return hola; 
+        return resultado;
     }
 
     useEffect(() => {
-        console.log("Entro a CuadroTurno");
         const aux = async () => {
             const turnoAux = await visualizarTurnos();
             setMostrar1(turnoAux)
         };
         aux();
-    }, [fechaTurno, turnoReservado ]);
+    }, [fechaTurno, turnoReservado]);
 
     return (
         <div className='contenedorCuadro'>

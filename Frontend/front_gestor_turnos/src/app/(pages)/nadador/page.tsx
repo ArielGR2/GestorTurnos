@@ -11,6 +11,7 @@ const Nadador = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [fecha, setFecha] = useState(moment());
   const [turnoReservado, setTurnoReservado] = useState(null);
+  const [botonAnteriorActivo, setBotonAnteriorActivo] = useState(true);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -26,15 +27,19 @@ const Nadador = () => {
     const jwt = require('jsonwebtoken');
     const usuarioId: number | null = jwt.decode(sessionStorage.getItem('token')).usuarioId;
     const username: string | null = jwt.decode(sessionStorage.getItem('token')).username;
-    return { usuarioId, username }
+    return { usuarioId, username };
   }
   const sumaDia = () => {
-    var auxFecha = fecha.clone().add(1, 'd')
+    var auxFecha = fecha.clone().add(1, 'd');
     setFecha(auxFecha);
+    setBotonAnteriorActivo(false);
   }
   const restaDia = () => {
-    var auxFecha = fecha.clone().subtract(1, 'd')
-    setFecha(auxFecha)
+    var auxFecha = fecha.clone().subtract(1, 'd');
+    setFecha(auxFecha);
+    if (auxFecha.format('YYYY-MM-DD') != moment().format('YYYY-MM-DD')) {
+      setBotonAnteriorActivo(false)
+    } else { setBotonAnteriorActivo(true) }
   }
   const muestraFecha = () => {
     return fecha.format('YYYY-MM-DD')
@@ -42,22 +47,21 @@ const Nadador = () => {
   const actualizarTurnoReservado = (turno: any) => {
     setTurnoReservado(turno);
   }
-
   return (
     <>
       <div className='div-pageNadador'>
         <div className="titulo1">
           <h1>Bienvenido {obtenerUsuario().username}</h1>
-          <button className="button" onClick={cerrarSesion}>Cerrar Sesion</button>
+          <button className="button buttonAnterior" onClick={cerrarSesion}>Cerrar Sesion</button>
         </div>
 
         <div className="main">
           <div className="div-main">
             <div className="subtitulo2">
-              <button className="button" onClick={restaDia}>Ver día Anterior</button>
+              <button className="button" disabled={botonAnteriorActivo} onClick={restaDia}>Ver día Anterior</button>
               <div className="subtitulo3">
                 <h2>Reservas del día: {muestraFecha()}</h2>
-                <h3>Ocupacion maxima por andarivel: 4</h3>
+                <h3>Ocupación máxima por andarivel: 4</h3>
               </div>
               <button className="button" onClick={sumaDia}>Ver día Siguiente</button>
             </div>

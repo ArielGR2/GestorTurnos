@@ -1,7 +1,6 @@
 'use client'
 import clienteAxios from "../services/Axios";
 import { AxiosResponse } from 'axios';
-// import { iUsuarioLogin } from "../model/iUsuario";
 
 export const loginUser = async (usuario: any) => {
   try {
