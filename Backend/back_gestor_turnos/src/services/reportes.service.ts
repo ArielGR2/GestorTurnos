@@ -9,7 +9,7 @@ export class ReportesService {
 
     async diaConMasReservas(): Promise<any> {
         const response = await this.databaseService.executeSelect(reportesQueries.diaConMasReservas, []);
-          const result = response.map((rs: RowDataPacket) => {
+        const result = response.map((rs: RowDataPacket) => {
             return {
                 fechaTurno: rs['fechaTurno'],
                 cantidad: rs['count(fechaTurno)'],
@@ -18,7 +18,7 @@ export class ReportesService {
         return result
     }
 
-    async nadadorConMasAusencias(fecha:any): Promise<any> {
+    async nadadorConMasAusencias(fecha: any): Promise<any> {
         const response = await this.databaseService.executeSelect(reportesQueries.nadadorConMasAusencias, [fecha.fechaTurno]);
         const result = response.map((rs: RowDataPacket) => {
             return {
@@ -30,9 +30,9 @@ export class ReportesService {
         return result
     }
 
-    async turnosPorHoraDia(fecha:any): Promise<any> {
+    async turnosPorHoraDia(fecha: any): Promise<any> {
         const response = await this.databaseService.executeSelect(reportesQueries.turnosPorHoraDia, [fecha.fechaTurno]);
-        
+
         const result = response.map((rs: RowDataPacket) => {
             return {
                 hora: rs['horaTurno'],
